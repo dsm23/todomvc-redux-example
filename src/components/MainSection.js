@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Footer from './Footer'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import React from "react";
+import PropTypes from "prop-types";
+import Footer from "./Footer";
+import VisibleTodoList from "../containers/VisibleTodoList";
 
 const MainSection = ({ todosCount, completedCount, actions }) => (
   <section className="main">
@@ -25,12 +25,12 @@ const MainSection = ({ todosCount, completedCount, actions }) => (
       />
     )}
   </section>
-)
+);
 
 MainSection.propTypes = {
   todosCount: PropTypes.number.isRequired,
   completedCount: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.object.isRequired,
+};
 
-export default MainSection
+export default MainSection;

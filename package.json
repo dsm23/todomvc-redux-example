@@ -5,6 +5,9 @@
   "devDependencies": {
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-css-order": "^2.0.1",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "react-scripts": "^4.0.3",
     "react-test-renderer": "^16.13.1"
   },
@@ -21,6 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node"
   },
