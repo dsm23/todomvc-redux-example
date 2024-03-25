@@ -3,7 +3,7 @@ import App from "./App";
 import Header from "../containers/Header";
 import MainSection from "../containers/MainSection";
 
-const setup = (_propOverrides) => {
+const setup = () => {
   const renderer = createRenderer();
   renderer.render(<App />);
   const output = renderer.getRenderOutput();
