@@ -1,26 +1,27 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import PropTypes from "prop-types";
 import TodoTextInput from "./TodoTextInput";
+import { addTodo } from "~/actions";
+import { useAppDispatch } from "~/app/hooks";
 
-const Header = ({ addTodo }) => (
-  <header className="header">
-    <h1>todos</h1>
-    <TodoTextInput
-      newTodo
-      onSave={(text) => {
-        if (text.length !== 0) {
-          addTodo(text);
-        }
-      }}
-      placeholder="What needs to be done?"
-    />
-  </header>
-);
+const Header = () => {
+  const dispatch = useAppDispatch();
 
-Header.propTypes = {
-  addTodo: PropTypes.func.isRequired,
+  return (
+    <header className="header">
+      <h1>todos</h1>
+      <TodoTextInput
+        newTodo
+        onSave={(text) => {
+          if (text.length !== 0) {
+            dispatch(addTodo(text));
+          }
+        }}
+        placeholder="What needs to be done?"
+      />
+    </header>
+  );
 };
 
 export default Header;
