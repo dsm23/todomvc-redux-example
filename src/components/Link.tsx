@@ -2,12 +2,12 @@
 // @ts-nocheck
 
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "clsx";
 
 const Link = ({ active, children, setFilter }) => (
   // eslint-disable jsx-a11y/anchor-is-valid
   <a
-    className={classnames({ selected: active })}
+    className={cx({ selected: active })}
     style={{ cursor: "pointer" }}
     onClick={() => setFilter()}
   >
