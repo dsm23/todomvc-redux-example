@@ -1,72 +1,76 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { Component } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import cx from "clsx";
+import { useAppDispatch } from "~/app/hooks";
 import TodoTextInput from "./TodoTextInput";
+import { completeTodo, deleteTodo, editTodo } from "~/actions";
 
-export default class TodoItem extends Component {
-  static propTypes = {
-    todo: PropTypes.object.isRequired,
-    editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
-    completeTodo: PropTypes.func.isRequired,
+const TodoItem = ({ todo }) => {
+  const [editing, setEditing] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const handleDoubleClick = () => {
+    setEditing(true);
   };
 
-  state = {
-    editing: false,
-  };
-
-  handleDoubleClick = () => {
-    this.setState({ editing: true });
-  };
-
-  handleSave = (id, text) => {
+  const handleSave = (id, text) => {
     if (text.length === 0) {
-      this.props.deleteTodo(id);
+      dispatch(deleteTodo(id));
     } else {
-      this.props.editTodo(id, text);
+      dispatch(editTodo(id, text));
     }
-    this.setState({ editing: false });
+    setEditing(false);
   };
 
-  render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
+  const handleChange = () => {
+    dispatch(completeTodo(todo.id));
+  };
 
-    let element;
-    if (this.state.editing) {
-      element = (
-        <TodoTextInput
-          text={todo.text}
-          editing={this.state.editing}
-          onSave={(text) => this.handleSave(todo.id, text)}
+  const handleClick = () => {
+    dispatch(deleteTodo(todo.id));
+  };
+
+  let element;
+  if (editing) {
+    element = (
+      <TodoTextInput
+        text={todo.text}
+        editing={editing}
+        onSave={(text) => handleSave(todo.id, text)}
+      />
+    );
+  } else {
+    element = (
+      <div className="view">
+        <input
+          className="toggle"
+          type="checkbox"
+          checked={todo.completed}
+          onChange={handleChange}
         />
-      );
-    } else {
-      element = (
-        <div className="view">
-          <input
-            className="toggle"
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => completeTodo(todo.id)}
-          />
-          <label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
-          <button className="destroy" onClick={() => deleteTodo(todo.id)} />
-        </div>
-      );
-    }
-
-    return (
-      <li
-        className={cx({
-          completed: todo.completed,
-          editing: this.state.editing,
-        })}
-      >
-        {element}
-      </li>
+        <label onDoubleClick={handleDoubleClick}>{todo.text}</label>
+        <button className="destroy" onClick={handleClick} />
+      </div>
     );
   }
-}
+
+  return (
+    <li
+      className={cx({
+        completed: todo.completed,
+        editing,
+      })}
+    >
+      {element}
+    </li>
+  );
+};
+
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+};
+
+export default TodoItem;

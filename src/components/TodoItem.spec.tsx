@@ -1,7 +1,19 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { deleteTodo } from "~/actions";
 import TodoItem from "./TodoItem";
+import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
+
+const store = createStore(rootReducer);
+
+vi.mock("~/actions", () => ({
+  completeTodo: vi.fn().mockReturnValue({ type: "foobar" }),
+  deleteTodo: vi.fn().mockReturnValue({ type: "foobar" }),
+  editTodo: vi.fn().mockReturnValue({ type: "foobar" }),
+}));
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setup = (props?: any) => {
@@ -11,12 +23,13 @@ const setup = (props?: any) => {
       text: "Use Redux",
       completed: false,
     },
-    editTodo: vi.fn(),
-    deleteTodo: vi.fn(),
-    completeTodo: vi.fn(),
   };
 
-  return render(<TodoItem {...defaultProps} {...props} />);
+  return render(
+    <Provider store={store}>
+      <TodoItem {...defaultProps} {...props} />
+    </Provider>,
+  );
 };
 
 describe("components", () => {
@@ -44,13 +57,11 @@ describe("components", () => {
     // });
 
     it("button onClick should call deleteTodo", () => {
-      const mockFn = vi.fn();
-
-      const { container } = setup({ deleteTodo: mockFn });
+      const { container } = setup();
 
       container.querySelector("button")?.click();
 
-      expect(mockFn).toBeCalledTimes(1);
+      expect(deleteTodo).toBeCalledTimes(1);
     });
 
     it("label onDoubleClick should put component in edit state", () => {
