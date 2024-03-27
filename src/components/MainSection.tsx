@@ -1,38 +1,46 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import PropTypes from "prop-types";
 import Footer from "./Footer";
 import VisibleTodoList from "./TodoList";
+import { clearCompleted, completeAllTodos } from "~/actions";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { getCompletedTodoCount, getTodos } from "~/selectors";
 
-const MainSection = ({ todosCount, completedCount, actions }) => (
-  <section className="main">
-    {!!todosCount && (
-      <span>
-        <input
-          className="toggle-all"
-          type="checkbox"
-          checked={completedCount === todosCount}
-          readOnly
+const MainSection = () => {
+  const dispatch = useAppDispatch();
+  const completedCount = useAppSelector(getCompletedTodoCount);
+  const todos = useAppSelector(getTodos);
+
+  const todosCount = todos.length;
+
+  const handleClick = () => dispatch(completeAllTodos);
+
+  const handleClearCompleted = () => dispatch(clearCompleted);
+
+  return (
+    <section className="main">
+      {!!todosCount && (
+        <span>
+          <input
+            className="toggle-all"
+            type="checkbox"
+            checked={completedCount === todosCount}
+            readOnly
+          />
+          <label onClick={handleClick} />
+        </span>
+      )}
+      <VisibleTodoList />
+      {!!todosCount && (
+        <Footer
+          completedCount={completedCount}
+          activeCount={todosCount - completedCount}
+          onClearCompleted={handleClearCompleted}
         />
-        <label onClick={actions.completeAllTodos} />
-      </span>
-    )}
-    <VisibleTodoList />
-    {!!todosCount && (
-      <Footer
-        completedCount={completedCount}
-        activeCount={todosCount - completedCount}
-        onClearCompleted={actions.clearCompleted}
-      />
-    )}
-  </section>
-);
-
-MainSection.propTypes = {
-  todosCount: PropTypes.number.isRequired,
-  completedCount: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired,
+      )}
+    </section>
+  );
 };
 
 export default MainSection;

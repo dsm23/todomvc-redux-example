@@ -1,6 +1,6 @@
 import type { FunctionComponent } from "react";
 import Header from "../components/Header";
-import MainSection from "../containers/MainSection";
+import MainSection from "../components/MainSection";
 
 const App: FunctionComponent = () => (
   <div>
