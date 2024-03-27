@@ -3,17 +3,27 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import Header from "./Header";
+import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
+import { addTodo } from "~/actions";
 
-const setup = (props) => {
-  const defaultProps = {
-    addTodo: vi.fn(),
-  };
+vi.mock("~/actions", () => ({
+  addTodo: vi.fn().mockReturnValue({ type: "foobar" }),
+}));
 
+const store = createStore(rootReducer);
+
+const setup = () => {
   return {
     user: userEvent.setup(),
-    ...render(<Header {...defaultProps} {...props} />),
+    ...render(
+      <Provider store={store}>
+        <Header />
+      </Provider>,
+    ),
   };
 };
 
@@ -32,11 +42,9 @@ describe("components", () => {
     });
 
     it("should call addTodo if length of text is greater than 0", async () => {
-      const mockFn = vi.fn();
+      const { user } = setup();
 
-      const { user } = setup({ addTodo: mockFn });
-
-      expect(mockFn).not.toBeCalled();
+      expect(addTodo).not.toBeCalled();
 
       const input = screen.getByPlaceholderText("What needs to be done?", {
         selector: "input",
@@ -52,7 +60,7 @@ describe("components", () => {
         charCode: 13,
       });
 
-      expect(mockFn).toBeCalledTimes(1);
+      expect(addTodo).toBeCalledTimes(1);
     });
   });
 });
