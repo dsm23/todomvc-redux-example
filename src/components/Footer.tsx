@@ -3,7 +3,7 @@
 
 import type { FunctionComponent } from "react";
 import PropTypes from "prop-types";
-import FilterLink from "../containers/FilterLink";
+import Link from "./Link";
 import {
   SHOW_ALL,
   SHOW_COMPLETED,
@@ -27,7 +27,7 @@ const Footer: FunctionComponent = (props) => {
       <ul className="filters">
         {Object.keys(FILTER_TITLES).map((filter) => (
           <li key={filter}>
-            <FilterLink filter={filter}>{FILTER_TITLES[filter]}</FilterLink>
+            <Link filter={filter}>{FILTER_TITLES[filter]}</Link>
           </li>
         ))}
       </ul>
