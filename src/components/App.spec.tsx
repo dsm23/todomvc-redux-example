@@ -1,29 +1,33 @@
-import { createRenderer } from "react-test-renderer/shallow";
+import { describe, expect, it } from "vitest";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import App from "./App";
-import Header from "../containers/Header";
-import MainSection from "../containers/MainSection";
+import { render } from "~/test-utils";
+import rootReducer from "~/reducers";
+
+const store = createStore(rootReducer);
 
 const setup = () => {
-  const renderer = createRenderer();
-  renderer.render(<App />);
-  const output = renderer.getRenderOutput();
-  return output;
+  return render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  );
 };
 
 describe("components", () => {
   describe("Header", () => {
     it("should render", () => {
-      const output = setup();
-      const [header] = output.props.children;
-      expect(header.type).toBe(Header);
+      const { container } = setup();
+      expect(container.querySelector("header")).toBeInTheDocument();
     });
   });
 
   describe("Mainsection", () => {
     it("should render", () => {
-      const output = setup();
-      const [, mainSection] = output.props.children;
-      expect(mainSection.type).toBe(MainSection);
+      const { container } = setup();
+
+      expect(container.querySelector("section")).toBeInTheDocument();
     });
   });
 });

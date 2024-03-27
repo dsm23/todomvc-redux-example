@@ -1,3 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
+import type { FunctionComponent } from "react";
 import PropTypes from "prop-types";
 import FilterLink from "../containers/FilterLink";
 import {
@@ -12,7 +16,7 @@ const FILTER_TITLES = {
   [SHOW_COMPLETED]: "Completed",
 };
 
-const Footer = (props) => {
+const Footer: FunctionComponent = (props) => {
   const { activeCount, completedCount, onClearCompleted } = props;
   const itemWord = activeCount === 1 ? "item" : "items";
   return (

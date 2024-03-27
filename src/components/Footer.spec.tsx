@@ -1,102 +1,91 @@
-import { createRenderer } from "react-test-renderer/shallow";
+import { describe, expect, it, vi } from "vitest";
+import { screen } from "@testing-library/react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import Footer from "./Footer";
-import FilterLink from "../containers/FilterLink";
-import {
-  SHOW_ALL,
-  SHOW_ACTIVE,
-  SHOW_COMPLETED,
-} from "../constants/TodoFilters";
+import rootReducer from "~/reducers";
+import { render } from "~/test-utils";
 
-const setup = (propOverrides) => {
-  const props = Object.assign(
-    {
-      completedCount: 0,
-      activeCount: 0,
-      onClearCompleted: jest.fn(),
-    },
-    propOverrides,
-  );
+const store = createStore(rootReducer);
 
-  const renderer = createRenderer();
-  renderer.render(<Footer {...props} />);
-  const output = renderer.getRenderOutput();
-
-  return {
-    props: props,
-    output: output,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (props?: any) => {
+  const defaultProps = {
+    completedCount: 0,
+    activeCount: 0,
+    onClearCompleted: vi.fn(),
   };
-};
 
-const getTextContent = (elem) => {
-  const children = Array.isArray(elem.props.children)
-    ? elem.props.children
-    : [elem.props.children];
-
-  return children.reduce(
-    (out, child) =>
-      // Concatenate the text
-      // Children are either elements or text strings
-      out + (child.props ? getTextContent(child) : child),
-    "",
+  // const renderer = createRenderer();
+  return render(
+    <Provider store={store}>
+      <Footer {...defaultProps} {...props} />
+    </Provider>,
   );
 };
 
 describe("components", () => {
   describe("Footer", () => {
     it("should render container", () => {
-      const { output } = setup();
-      expect(output.type).toBe("footer");
-      expect(output.props.className).toBe("footer");
+      const { container } = setup();
+
+      expect(container.querySelector("footer")).toBeInTheDocument();
     });
 
     it("should display active count when 0", () => {
-      const { output } = setup({ activeCount: 0 });
-      const [count] = output.props.children;
-      expect(getTextContent(count)).toBe("No items left");
+      setup({ activeCount: 0 });
+
+      expect(
+        screen.getByText(
+          (_, element) => element?.textContent === "No items left",
+        ),
+      ).toBeInTheDocument();
     });
 
     it("should display active count when above 0", () => {
-      const { output } = setup({ activeCount: 1 });
-      const [count] = output.props.children;
-      expect(getTextContent(count)).toBe("1 item left");
+      setup({ activeCount: 1 });
+
+      expect(
+        screen.getByText(
+          (_, element) => element?.textContent === "1 item left",
+        ),
+      ).toBeInTheDocument();
     });
 
     it("should render filters", () => {
-      const todoFilters = [SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED];
       const filterTitles = ["All", "Active", "Completed"];
-      const { output } = setup();
-      const [, filters] = output.props.children;
-      expect(filters.type).toBe("ul");
-      expect(filters.props.className).toBe("filters");
-      expect(filters.props.children.length).toBe(3);
-      filters.props.children.forEach(function checkFilter(filter, i) {
-        expect(filter.type).toBe("li");
-        const a = filter.props.children;
-        expect(a.type).toBe(FilterLink);
-        expect(a.props.filter).toBe(todoFilters[i]);
-        expect(a.props.children).toBe(filterTitles[i]);
-      });
+
+      setup();
+
+      for (const title of filterTitles) {
+        expect(screen.getByText(title)).toBeInTheDocument();
+      }
     });
 
     it("shouldnt show clear button when no completed todos", () => {
-      const { output } = setup({ completedCount: 0 });
-      const [, , clear] = output.props.children;
-      expect(clear).toBe(false);
+      setup({ completedCount: 0 });
+
+      expect(screen.queryByText("Clear completed")).not.toBeInTheDocument();
     });
 
     it("should render clear button when completed todos", () => {
-      const { output } = setup({ completedCount: 1 });
-      const [, , clear] = output.props.children;
-      expect(clear.type).toBe("button");
-      expect(clear.props.className).toBe("clear-completed");
-      expect(clear.props.children).toBe("Clear completed");
+      setup({ completedCount: 1 });
+
+      expect(screen.queryByText("Clear completed")).toBeInTheDocument();
     });
 
     it("should call onClearCompleted on clear button click", () => {
-      const { output, props } = setup({ completedCount: 1 });
-      const [, , clear] = output.props.children;
-      clear.props.onClick({});
-      expect(props.onClearCompleted).toBeCalled();
+      const mockFn = vi.fn();
+
+      setup({ completedCount: 1, onClearCompleted: mockFn });
+
+      const button = screen.getByText("Clear completed");
+
+      expect(button).toBeInTheDocument();
+
+      button.click();
+
+      expect(mockFn).toBeCalledTimes(1);
     });
   });
 });

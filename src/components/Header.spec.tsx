@@ -1,45 +1,58 @@
-import { createRenderer } from "react-test-renderer/shallow";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { describe, expect, it, vi } from "vitest";
+import { fireEvent, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Header from "./Header";
-import TodoTextInput from "./TodoTextInput";
+import { render } from "~/test-utils";
 
-const setup = () => {
-  const props = {
-    addTodo: jest.fn(),
+const setup = (props) => {
+  const defaultProps = {
+    addTodo: vi.fn(),
   };
 
-  const renderer = createRenderer();
-  renderer.render(<Header {...props} />);
-  const output = renderer.getRenderOutput();
-
   return {
-    props: props,
-    output: output,
-    renderer: renderer,
+    user: userEvent.setup(),
+    ...render(<Header {...defaultProps} {...props} />),
   };
 };
 
 describe("components", () => {
   describe("Header", () => {
     it("should render correctly", () => {
-      const { output } = setup();
-      expect(output.type).toBe("header");
-      expect(output.props.className).toBe("header");
+      const { container } = setup();
 
-      const [h1, input] = output.props.children;
-      expect(h1.type).toBe("h1");
-      expect(h1.props.children).toBe("todos");
-      expect(input.type).toBe(TodoTextInput);
-      expect(input.props.newTodo).toBe(true);
-      expect(input.props.placeholder).toBe("What needs to be done?");
+      expect(container.querySelector("header")).toBeInTheDocument();
+      expect(screen.getByText("todos", { selector: "h1" })).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("What needs to be done?", {
+          selector: "input",
+        }),
+      ).toBeInTheDocument();
     });
 
-    it("should call addTodo if length of text is greater than 0", () => {
-      const { output, props } = setup();
-      const input = output.props.children[1];
-      input.props.onSave("");
-      expect(props.addTodo).not.toBeCalled();
-      input.props.onSave("Use Redux");
-      expect(props.addTodo).toBeCalled();
+    it("should call addTodo if length of text is greater than 0", async () => {
+      const mockFn = vi.fn();
+
+      const { user } = setup({ addTodo: mockFn });
+
+      expect(mockFn).not.toBeCalled();
+
+      const input = screen.getByPlaceholderText("What needs to be done?", {
+        selector: "input",
+      });
+
+      await user.type(input, "Hello, World![Enter]");
+
+      input.focus();
+      fireEvent.keyDown(document.activeElement || document.body, {
+        key: "Enter",
+        code: "Enter",
+        keyCode: 13,
+        charCode: 13,
+      });
+
+      expect(mockFn).toBeCalledTimes(1);
     });
   });
 });

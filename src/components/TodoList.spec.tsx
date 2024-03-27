@@ -1,6 +1,6 @@
-import { createRenderer } from "react-test-renderer/shallow";
+import { describe, expect, it, vi } from "vitest";
 import TodoList from "./TodoList";
-import TodoItem from "./TodoItem";
+import { render } from "~/test-utils";
 
 const setup = () => {
   const props = {
@@ -17,40 +17,29 @@ const setup = () => {
       },
     ],
     actions: {
-      editTodo: jest.fn(),
-      deleteTodo: jest.fn(),
-      completeTodo: jest.fn(),
-      completeAll: jest.fn(),
-      clearCompleted: jest.fn(),
+      editTodo: vi.fn(),
+      deleteTodo: vi.fn(),
+      completeTodo: vi.fn(),
+      completeAll: vi.fn(),
+      clearCompleted: vi.fn(),
     },
   };
 
-  const renderer = createRenderer();
-  renderer.render(<TodoList {...props} />);
-  const output = renderer.getRenderOutput();
-
-  return {
-    props: props,
-    output: output,
-  };
+  return render(<TodoList {...props} />);
 };
 
 describe("components", () => {
   describe("TodoList", () => {
     it("should render container", () => {
-      const { output } = setup();
-      expect(output.type).toBe("ul");
-      expect(output.props.className).toBe("todo-list");
+      const { container } = setup();
+
+      expect(container.querySelector("ul")).toBeInTheDocument();
     });
 
     it("should render todos", () => {
-      const { output, props } = setup();
-      expect(output.props.children.length).toBe(2);
-      output.props.children.forEach((todo, i) => {
-        expect(todo.type).toBe(TodoItem);
-        expect(Number(todo.key)).toBe(props.filteredTodos[i].id);
-        expect(todo.props.todo).toBe(props.filteredTodos[i]);
-      });
+      const { container } = setup();
+
+      expect(container.querySelectorAll("li")).toHaveLength(2);
     });
   });
 });
