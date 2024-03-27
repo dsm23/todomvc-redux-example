@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as TodoActions from "../actions";

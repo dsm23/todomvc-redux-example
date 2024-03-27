@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import todos from "./todos";
 import * as types from "../constants/ActionTypes";
 
@@ -296,6 +297,8 @@ describe("todos reducer", () => {
           type: types.ADD_TODO,
           text: "Write more tests",
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
       ].reduce(todos, [
         {
           id: 0,

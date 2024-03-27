@@ -7,7 +7,13 @@ import {
   CLEAR_COMPLETED,
 } from "../constants/ActionTypes";
 
-const initialState = [
+type State = {
+  text: string;
+  completed: boolean;
+  id: number;
+};
+
+const initialState: State[] = [
   {
     text: "Use Redux",
     completed: false,
@@ -15,7 +21,9 @@ const initialState = [
   },
 ];
 
-export default function todos(state = initialState, action) {
+type Action = Record<string, unknown>;
+
+export default function todos(state = initialState, action: Action) {
   switch (action.type) {
     case ADD_TODO:
       return [

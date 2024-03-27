@@ -1,44 +1,44 @@
-import { createRenderer } from "react-test-renderer/shallow";
+import { describe, expect, it, vi } from "vitest";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Link from "./Link";
+import { render } from "~/test-utils";
 
-const setup = (propOverrides) => {
-  const props = Object.assign(
-    {
-      active: false,
-      children: "All",
-      setFilter: jest.fn(),
-    },
-    propOverrides,
-  );
-
-  const renderer = createRenderer();
-  renderer.render(<Link {...props} />);
-  const output = renderer.getRenderOutput();
-
-  return {
-    props: props,
-    output: output,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setup = (props?: any) => {
+  const defaultProps = {
+    active: false,
+    children: "All",
+    setFilter: vi.fn(),
   };
+
+  return render(<Link {...defaultProps} {...props} />);
 };
 
 describe("component", () => {
   describe("Link", () => {
     it("should render correctly", () => {
-      const { output } = setup();
-      expect(output.type).toBe("a");
-      expect(output.props.style.cursor).toBe("pointer");
-      expect(output.props.children).toBe("All");
+      setup();
+
+      expect(screen.getByText("All", { selector: "a" })).toBeInTheDocument();
     });
 
     it("should have class selected if active", () => {
-      const { output } = setup({ active: true });
-      expect(output.props.className).toBe("selected");
+      setup({ active: true });
+
+      expect(screen.getByText("All", { selector: "a" })).toHaveClass(
+        "selected",
+      );
     });
 
-    it("should call setFilter on click", () => {
-      const { output, props } = setup();
-      output.props.onClick();
-      expect(props.setFilter).toBeCalled();
+    it("should call setFilter on click", async () => {
+      const mockFn = vi.fn();
+
+      setup({ setFilter: mockFn });
+
+      await userEvent.click(screen.getByText("All", { selector: "a" }));
+
+      expect(mockFn).toBeCalledTimes(1);
     });
   });
 });

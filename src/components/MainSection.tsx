@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import PropTypes from "prop-types";
 import Footer from "./Footer";
 import VisibleTodoList from "../containers/VisibleTodoList";
