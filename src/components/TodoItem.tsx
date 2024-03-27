@@ -1,14 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useId, useState } from "react";
+import type { FunctionComponent } from "react";
 import cx from "clsx";
+import { completeTodo, deleteTodo, editTodo } from "~/actions";
 import { useAppDispatch } from "~/app/hooks";
 import TodoTextInput from "./TodoTextInput";
-import { completeTodo, deleteTodo, editTodo } from "~/actions";
 
-const TodoItem = ({ todo }) => {
+type Todo = {
+  text: string;
+  completed: boolean;
+  id: number;
+};
+
+type Props = {
+  todo: Todo;
+};
+
+const TodoItem: FunctionComponent<Props> = ({ todo }) => {
+  const htmlId = useId();
   const [editing, setEditing] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -16,7 +24,7 @@ const TodoItem = ({ todo }) => {
     setEditing(true);
   };
 
-  const handleSave = (id, text) => {
+  const handleSave = (id: number, text: string) => {
     if (text.length === 0) {
       dispatch(deleteTodo(id));
     } else {
@@ -39,19 +47,22 @@ const TodoItem = ({ todo }) => {
       <TodoTextInput
         text={todo.text}
         editing={editing}
-        onSave={(text) => handleSave(todo.id, text)}
+        onSave={(text: string) => handleSave(todo.id, text)}
       />
     );
   } else {
     element = (
       <div className="view">
         <input
+          id={htmlId}
           className="toggle"
           type="checkbox"
           checked={todo.completed}
           onChange={handleChange}
         />
-        <label onDoubleClick={handleDoubleClick}>{todo.text}</label>
+        <label htmlFor={htmlId} onDoubleClick={handleDoubleClick}>
+          {todo.text}
+        </label>
         <button className="destroy" onClick={handleClick} />
       </div>
     );
@@ -67,10 +78,6 @@ const TodoItem = ({ todo }) => {
       {element}
     </li>
   );
-};
-
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
 };
 
 export default TodoItem;
