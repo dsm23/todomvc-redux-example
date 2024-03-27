@@ -3,7 +3,7 @@
 
 import { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "clsx";
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -41,7 +41,7 @@ export default class TodoTextInput extends Component {
   render() {
     return (
       <input
-        className={classnames({
+        className={cx({
           edit: this.props.editing,
           "new-todo": this.props.newTodo,
         })}

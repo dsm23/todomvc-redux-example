@@ -3,7 +3,7 @@
 
 import { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
+import cx from "clsx";
 import TodoTextInput from "./TodoTextInput";
 
 export default class TodoItem extends Component {
@@ -60,7 +60,7 @@ export default class TodoItem extends Component {
 
     return (
       <li
-        className={classnames({
+        className={cx({
           completed: todo.completed,
           editing: this.state.editing,
         })}
