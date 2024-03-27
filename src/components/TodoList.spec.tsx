@@ -1,32 +1,18 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import TodoList from "./TodoList";
+import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
 
-const setup = () => {
-  const props = {
-    filteredTodos: [
-      {
-        text: "Use Redux",
-        completed: false,
-        id: 0,
-      },
-      {
-        text: "Run the tests",
-        completed: true,
-        id: 1,
-      },
-    ],
-    actions: {
-      editTodo: vi.fn(),
-      deleteTodo: vi.fn(),
-      completeTodo: vi.fn(),
-      completeAll: vi.fn(),
-      clearCompleted: vi.fn(),
-    },
-  };
+const store = createStore(rootReducer);
 
-  return render(<TodoList {...props} />);
-};
+const setup = () =>
+  render(
+    <Provider store={store}>
+      <TodoList />
+    </Provider>,
+  );
 
 describe("components", () => {
   describe("TodoList", () => {
@@ -39,7 +25,9 @@ describe("components", () => {
     it("should render todos", () => {
       const { container } = setup();
 
-      expect(container.querySelectorAll("li")).toHaveLength(2);
+      expect(container.querySelectorAll("li")).toHaveLength(1);
     });
+
+    // TODO: make a test for preloadedState
   });
 });

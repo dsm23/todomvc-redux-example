@@ -5,10 +5,11 @@ import PropTypes from "prop-types";
 import cx from "clsx";
 import { setVisibilityFilter } from "~/actions";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import { getVisibilityFilter } from "~/selectors";
 
 const Link = ({ children, filter }) => {
   const dispatch = useAppDispatch();
-  const visibilityFilter = useAppSelector((state) => state.visibilityFilter);
+  const visibilityFilter = useAppSelector(getVisibilityFilter);
 
   const active = filter === visibilityFilter;
 

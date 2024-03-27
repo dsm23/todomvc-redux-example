@@ -3,7 +3,7 @@
 
 import PropTypes from "prop-types";
 import Footer from "./Footer";
-import VisibleTodoList from "../containers/VisibleTodoList";
+import VisibleTodoList from "./TodoList";
 
 const MainSection = ({ todosCount, completedCount, actions }) => (
   <section className="main">

@@ -8,8 +8,8 @@ import {
   SHOW_ACTIVE,
 } from "../constants/TodoFilters";
 
-const getVisibilityFilter = (state) => state.visibilityFilter;
-const getTodos = (state) => state.todos;
+export const getVisibilityFilter = (state) => state.visibilityFilter;
+export const getTodos = (state) => state.todos;
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],
