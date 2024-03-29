@@ -1,32 +1,43 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 import { setVisibilityFilter } from "~/features/visibility-filter/slice";
 import Link from "./Link";
-import rootReducer from "~/reducers";
-import { render } from "~/test-utils";
+import { renderWithProviders } from "~/test-utils";
 
-vi.mock("~/features/visibility-filter/slice", () => ({
-  getVisibilityFilter: vi.fn(),
-  setVisibilityFilter: vi.fn().mockReturnValue({ type: "foobar" }),
-}));
+vi.mock("~/app/hooks", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/app/hooks")>();
 
-const store = createStore(rootReducer);
+  return {
+    ...mod,
+    useAppDispatch: vi.fn(() => vi.fn()),
+  };
+});
+
+vi.mock("~/features/visibility-filter/slice", async (importOriginal) => {
+  const mod =
+    await importOriginal<typeof import("~/features/visibility-filter/slice")>();
+
+  return {
+    ...mod,
+    setVisibilityFilter: vi.fn(),
+  };
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setup = (props?: any) => {
   const defaultProps = {
     children: "All",
-    filter: "All",
+    filter: "show_all",
   };
 
-  return render(
-    <Provider store={store}>
-      <Link {...defaultProps} {...props} />
-    </Provider>,
-  );
+  return renderWithProviders(<Link {...defaultProps} {...props} />, {
+    preloadedState: {
+      visibilityFilter: {
+        value: "show_all",
+      },
+    },
+  });
 };
 
 describe("component", () => {
@@ -38,13 +49,13 @@ describe("component", () => {
     });
 
     // TODO: requires preloadedState
-    // it("should have class selected if active", () => {
-    //   setup();
+    it("should have class selected if active", () => {
+      setup();
 
-    //   expect(screen.getByText("All", { selector: "a" })).toHaveClass(
-    //     "selected",
-    //   );
-    // });
+      expect(screen.getByText("All", { selector: "a" })).toHaveClass(
+        "selected",
+      );
+    });
 
     it("should call setFilter on click", async () => {
       setup();

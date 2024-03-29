@@ -1,15 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import PropTypes from "prop-types";
+import type { FunctionComponent, ReactNode } from "react";
 import cx from "clsx";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import {
   getVisibilityFilter,
   setVisibilityFilter,
 } from "~/features/visibility-filter/slice";
+import type { VisibilityFilter } from "~/features/visibility-filter/slice";
 
-const Link = ({ children, filter }) => {
+type Props = {
+  children: ReactNode;
+  filter: VisibilityFilter;
+};
+
+const Link: FunctionComponent<Props> = ({ children, filter }) => {
   const dispatch = useAppDispatch();
   const visibilityFilter = useAppSelector(getVisibilityFilter);
 
@@ -29,11 +32,6 @@ const Link = ({ children, filter }) => {
       {children}
     </a>
   );
-};
-
-Link.propTypes = {
-  children: PropTypes.node.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 
 export default Link;

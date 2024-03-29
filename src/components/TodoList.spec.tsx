@@ -1,32 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { describe, expect, it } from "vitest";
+import { screen } from "@testing-library/react";
 import TodoList from "./TodoList";
-import rootReducer from "~/reducers";
-import { render } from "~/test-utils";
+import { renderWithProviders } from "~/test-utils";
+import { RootState } from "~/app/store";
 
-vi.mock("~/selectors", () => ({
-  getVisibleTodos: vi.fn().mockReturnValue([
-    {
-      text: "Use Redux",
-      completed: false,
-      id: 0,
-    },
-  ]),
-}));
-
-vi.mock("~/features/visibility-filter/slice", () => ({
-  getVisibilityFilter: vi.fn().mockReturnValue("show_all"),
-}));
-
-const store = createStore(rootReducer);
-
-const setup = () =>
-  render(
-    <Provider store={store}>
-      <TodoList />
-    </Provider>,
-  );
+const setup = (preloadedState?: Partial<RootState>) =>
+  renderWithProviders(<TodoList />, { preloadedState });
 
 describe("components", () => {
   describe("TodoList", () => {
@@ -43,5 +22,21 @@ describe("components", () => {
     });
 
     // TODO: make a test for preloadedState
+    it("should render preloaded todos", () => {
+      setup({
+        todos: {
+          value: [
+            {
+              text: "Run the tests",
+              completed: false,
+              id: 0,
+            },
+          ],
+        },
+      });
+
+      expect(screen.getByText("Run the tests")).toBeInTheDocument();
+      expect(screen.queryByText("Use Redux")).not.toBeInTheDocument();
+    });
   });
 });

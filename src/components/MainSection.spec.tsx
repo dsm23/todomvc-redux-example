@@ -1,40 +1,32 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-// import { clearCompleted } from "~/actions";
+import { RootState } from "~/app/store";
 import MainSection from "./MainSection";
-import { render } from "~/test-utils";
-import rootReducer from "~/reducers";
+import { clearCompleted } from "~/features/todos/slice";
+import { renderWithProviders } from "~/test-utils";
 
-vi.mock("~/features/todos/slice", () => ({
-  clearComplete: vi.fn().mockReturnValue({ type: "foobar" }),
-  completeAllTodos: vi.fn().mockReturnValue({ type: "foobar" }),
-  completeTodo: vi.fn().mockImplementation((id) => ({ type: "foobar", id })),
-  getTodos: vi.fn().mockReturnValue([
-    {
-      text: "Use Redux",
-      completed: false,
-      id: 0,
-    },
-  ]),
-}));
+vi.mock("~/app/hooks", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/app/hooks")>();
 
-vi.mock("~/features/visibility-filter/slice", () => ({
-  getVisibilityFilter: vi.fn().mockReturnValue("show_all"),
-}));
+  return {
+    ...mod,
+    useAppDispatch: vi.fn(() => vi.fn()),
+  };
+});
 
-const store = createStore(rootReducer);
+vi.mock("~/features/todos/slice", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/features/todos/slice")>();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const setup = (props?: any) => {
-  const defaultProps = {};
+  return {
+    ...mod,
+    clearCompleted: vi.fn(),
+    completeAllTodos: vi.fn(),
+    completeTodo: vi.fn(),
+  };
+});
 
-  return render(
-    <Provider store={store}>
-      <MainSection {...defaultProps} {...props} />
-    </Provider>,
-  );
+const setup = (preloadedState?: Partial<RootState>) => {
+  return renderWithProviders(<MainSection />, { preloadedState });
 };
 
 describe("components", () => {
@@ -80,14 +72,23 @@ describe("components", () => {
         expect(screen.queryByText("items left")).not.toBeInTheDocument();
       });
 
-      // TODO: requires preloadedState
-      // it("onClearCompleted should call clearCompleted", async () => {
-      //   setup();
+      it("onClearCompleted should call clearCompleted", async () => {
+        setup({
+          todos: {
+            value: [
+              {
+                id: 0,
+                completed: true,
+                text: "Use Redux",
+              },
+            ],
+          },
+        });
 
-      //   screen.getByText("Clear completed", { selector: "button" }).click();
+        screen.getByText("Clear completed", { selector: "button" }).click();
 
-      //   expect(clearCompleted).toBeCalledTimes(1);
-      // });
+        expect(clearCompleted).toBeCalledTimes(1);
+      });
     });
 
     describe("visible todo list", () => {
@@ -100,10 +101,11 @@ describe("components", () => {
 
     describe("toggle all input and footer", () => {
       it("should not render if there are no todos", () => {
-        setup({
-          todosCount: 0,
-          completedCount: 0,
-        });
+        setup();
+        //   {
+        //   todosCount: 0,
+        //   completedCount: 0,
+        // }
 
         // expect(renderedChildren.length).toBe(1);
         // expect(renderedChildren[0].type).toBe(VisibleTodoList);

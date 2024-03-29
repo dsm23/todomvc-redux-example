@@ -1,12 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 import Footer from "./Footer";
-import rootReducer from "~/reducers";
-import { render } from "~/test-utils";
-
-const store = createStore(rootReducer);
+import { renderWithProviders } from "~/test-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setup = (props?: any) => {
@@ -17,11 +12,7 @@ const setup = (props?: any) => {
   };
 
   // const renderer = createRenderer();
-  return render(
-    <Provider store={store}>
-      <Footer {...defaultProps} {...props} />
-    </Provider>,
-  );
+  return renderWithProviders(<Footer {...defaultProps} {...props} />);
 };
 
 describe("components", () => {

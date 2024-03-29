@@ -1,19 +1,28 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 import { deleteTodo } from "~/features/todos/slice";
 import TodoItem from "./TodoItem";
-import rootReducer from "~/reducers";
-import { render } from "~/test-utils";
+import { renderWithProviders } from "~/test-utils";
 
-const store = createStore(rootReducer);
+vi.mock("~/app/hooks", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/app/hooks")>();
 
-vi.mock("~/features/todos/slice", () => ({
-  completeTodo: vi.fn().mockReturnValue({ type: "foobar" }),
-  deleteTodo: vi.fn().mockReturnValue({ type: "foobar" }),
-  editTodo: vi.fn().mockReturnValue({ type: "foobar" }),
-}));
+  return {
+    ...mod,
+    useAppDispatch: vi.fn(() => vi.fn()),
+  };
+});
+
+vi.mock("~/features/todos/slice", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/features/todos/slice")>();
+
+  return {
+    ...mod,
+    completeTodo: vi.fn(),
+    deleteTodo: vi.fn(),
+    editTodo: vi.fn(),
+  };
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setup = (props?: any) => {
@@ -25,11 +34,7 @@ const setup = (props?: any) => {
     },
   };
 
-  return render(
-    <Provider store={store}>
-      <TodoItem {...defaultProps} {...props} />
-    </Provider>,
-  );
+  return renderWithProviders(<TodoItem {...defaultProps} {...props} />);
 };
 
 describe("components", () => {
