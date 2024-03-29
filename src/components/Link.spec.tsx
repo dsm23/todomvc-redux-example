@@ -3,12 +3,13 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { setVisibilityFilter } from "~/actions";
+import { setVisibilityFilter } from "~/features/visibility-filter/slice";
 import Link from "./Link";
 import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
 
-vi.mock("~/actions", () => ({
+vi.mock("~/features/visibility-filter/slice", () => ({
+  getVisibilityFilter: vi.fn(),
   setVisibilityFilter: vi.fn().mockReturnValue({ type: "foobar" }),
 }));
 

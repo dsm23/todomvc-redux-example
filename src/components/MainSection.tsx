@@ -3,9 +3,13 @@
 
 import Footer from "./Footer";
 import VisibleTodoList from "./TodoList";
-import { clearCompleted, completeAllTodos } from "~/actions";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { getCompletedTodoCount, getTodos } from "~/selectors";
+import {
+  clearCompleted,
+  completeAllTodos,
+  getTodos,
+} from "~/features/todos/slice";
+import { getCompletedTodoCount } from "~/selectors";
 
 const MainSection = () => {
   const dispatch = useAppDispatch();
@@ -14,9 +18,9 @@ const MainSection = () => {
 
   const todosCount = todos.length;
 
-  const handleClick = () => dispatch(completeAllTodos);
+  const handleClick = () => dispatch(completeAllTodos());
 
-  const handleClearCompleted = () => dispatch(clearCompleted);
+  const handleClearCompleted = () => dispatch(clearCompleted());
 
   return (
     <section className="main">

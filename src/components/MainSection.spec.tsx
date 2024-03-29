@@ -7,10 +7,21 @@ import MainSection from "./MainSection";
 import { render } from "~/test-utils";
 import rootReducer from "~/reducers";
 
-vi.mock("~/actions", () => ({
+vi.mock("~/features/todos/slice", () => ({
   clearComplete: vi.fn().mockReturnValue({ type: "foobar" }),
   completeAllTodos: vi.fn().mockReturnValue({ type: "foobar" }),
   completeTodo: vi.fn().mockImplementation((id) => ({ type: "foobar", id })),
+  getTodos: vi.fn().mockReturnValue([
+    {
+      text: "Use Redux",
+      completed: false,
+      id: 0,
+    },
+  ]),
+}));
+
+vi.mock("~/features/visibility-filter/slice", () => ({
+  getVisibilityFilter: vi.fn().mockReturnValue("show_all"),
 }));
 
 const store = createStore(rootReducer);
