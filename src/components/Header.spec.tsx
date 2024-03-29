@@ -6,11 +6,11 @@ import userEvent from "@testing-library/user-event";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Header from "./Header";
+import { addTodo } from "~/features/todos/slice";
 import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
-import { addTodo } from "~/actions";
 
-vi.mock("~/actions", () => ({
+vi.mock("~/features/todos/slice", () => ({
   addTodo: vi.fn().mockReturnValue({ type: "foobar" }),
 }));
 

@@ -2,14 +2,14 @@ import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { deleteTodo } from "~/actions";
+import { deleteTodo } from "~/features/todos/slice";
 import TodoItem from "./TodoItem";
 import rootReducer from "~/reducers";
 import { render } from "~/test-utils";
 
 const store = createStore(rootReducer);
 
-vi.mock("~/actions", () => ({
+vi.mock("~/features/todos/slice", () => ({
   completeTodo: vi.fn().mockReturnValue({ type: "foobar" }),
   deleteTodo: vi.fn().mockReturnValue({ type: "foobar" }),
   editTodo: vi.fn().mockReturnValue({ type: "foobar" }),

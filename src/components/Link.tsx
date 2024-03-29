@@ -3,9 +3,11 @@
 
 import PropTypes from "prop-types";
 import cx from "clsx";
-import { setVisibilityFilter } from "~/actions";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import { getVisibilityFilter } from "~/selectors";
+import {
+  getVisibilityFilter,
+  setVisibilityFilter,
+} from "~/features/visibility-filter/slice";
 
 const Link = ({ children, filter }) => {
   const dispatch = useAppDispatch();

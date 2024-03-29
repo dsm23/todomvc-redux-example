@@ -1,9 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import TodoTextInput from "./TodoTextInput";
-import { addTodo } from "~/actions";
 import { useAppDispatch } from "~/app/hooks";
+import TodoTextInput from "./TodoTextInput";
+import { addTodo } from "~/features/todos/slice";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -13,9 +10,9 @@ const Header = () => {
       <h1>todos</h1>
       <TodoTextInput
         newTodo
-        onSave={(text) => {
+        onSave={(text: string) => {
           if (text.length !== 0) {
-            dispatch(addTodo(text));
+            dispatch(addTodo({ text }));
           }
         }}
         placeholder="What needs to be done?"

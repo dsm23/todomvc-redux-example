@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { createSelector } from "reselect";
 import {
   SHOW_ALL,
@@ -8,8 +5,8 @@ import {
   SHOW_ACTIVE,
 } from "../constants/TodoFilters";
 
-export const getVisibilityFilter = (state) => state.visibilityFilter;
-export const getTodos = (state) => state.todos;
+import { getTodos } from "~/features/todos/slice";
+import { getVisibilityFilter } from "~/features/visibility-filter/slice";
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],

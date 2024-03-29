@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import type { FunctionComponent } from "react";
 import cx from "clsx";
-import { completeTodo, deleteTodo, editTodo } from "~/actions";
+import { completeTodo, deleteTodo, editTodo } from "~/features/todos/slice";
 import { useAppDispatch } from "~/app/hooks";
 import TodoTextInput from "./TodoTextInput";
 
@@ -26,19 +26,19 @@ const TodoItem: FunctionComponent<Props> = ({ todo }) => {
 
   const handleSave = (id: number, text: string) => {
     if (text.length === 0) {
-      dispatch(deleteTodo(id));
+      dispatch(deleteTodo({ id }));
     } else {
-      dispatch(editTodo(id, text));
+      dispatch(editTodo({ id, text }));
     }
     setEditing(false);
   };
 
   const handleChange = () => {
-    dispatch(completeTodo(todo.id));
+    dispatch(completeTodo({ id: todo.id }));
   };
 
   const handleClick = () => {
-    dispatch(deleteTodo(todo.id));
+    dispatch(deleteTodo({ id: todo.id }));
   };
 
   let element;
