@@ -3,29 +3,32 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 import Header from "./Header";
 import { addTodo } from "~/features/todos/slice";
-import rootReducer from "~/reducers";
-import { render } from "~/test-utils";
+import { renderWithProviders } from "~/test-utils";
 
-vi.mock("~/features/todos/slice", () => ({
-  addTodo: vi.fn().mockReturnValue({ type: "foobar" }),
-}));
+vi.mock("~/app/hooks", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/app/hooks")>();
 
-const store = createStore(rootReducer);
-
-const setup = () => {
   return {
-    user: userEvent.setup(),
-    ...render(
-      <Provider store={store}>
-        <Header />
-      </Provider>,
-    ),
+    ...mod,
+    useAppDispatch: vi.fn(() => vi.fn()),
   };
-};
+});
+
+vi.mock("~/features/todos/slice", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("~/features/todos/slice")>();
+
+  return {
+    ...mod,
+    addTodo: vi.fn(),
+  };
+});
+
+const setup = () => ({
+  user: userEvent.setup(),
+  ...renderWithProviders(<Header />),
+});
 
 describe("components", () => {
   describe("Header", () => {
