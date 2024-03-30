@@ -15,7 +15,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle ADD_TODO", () => {
+  it("should handle addTodo", () => {
     expect(
       reducer(
         { value: [] },
@@ -104,7 +104,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle DELETE_TODO", () => {
+  it("should handle deleteTodo", () => {
     expect(
       reducer(
         {
@@ -136,7 +136,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle EDIT_TODO", () => {
+  it("should handle editTodo", () => {
     expect(
       reducer(
         {
@@ -174,7 +174,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle COMPLETE_TODO", () => {
+  it("should handle completeTodo", () => {
     expect(
       reducer(
         {
@@ -211,7 +211,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle COMPLETE_ALL_TODOS", () => {
+  it("should handle completeAllTodos", () => {
     expect(
       reducer(
         {
@@ -280,7 +280,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should handle CLEAR_COMPLETED", () => {
+  it("should handle clearCompleted", () => {
     expect(
       reducer(
         {
@@ -310,7 +310,7 @@ describe("todos reducer", () => {
     });
   });
 
-  it("should not generate duplicate ids after CLEAR_COMPLETED", () => {
+  it("should not generate duplicate ids after clearCompleted", () => {
     expect(
       [
         completeTodo({
