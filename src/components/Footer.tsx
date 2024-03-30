@@ -1,22 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import type { FunctionComponent } from "react";
-import PropTypes from "prop-types";
 import Link from "./Link";
-import {
-  SHOW_ALL,
-  SHOW_COMPLETED,
-  SHOW_ACTIVE,
-} from "../constants/TodoFilters";
+import { VisibilityFilter, filters } from "~/features/visibility-filter/slice";
 
 const FILTER_TITLES = {
-  [SHOW_ALL]: "All",
-  [SHOW_ACTIVE]: "Active",
-  [SHOW_COMPLETED]: "Completed",
+  [filters.SHOW_ALL]: "All",
+  [filters.SHOW_ACTIVE]: "Active",
+  [filters.SHOW_COMPLETED]: "Completed",
+} as const;
+
+type Props = {
+  completedCount: number;
+  activeCount: number;
+  onClearCompleted: () => void;
 };
 
-const Footer: FunctionComponent = (props) => {
+const Footer: FunctionComponent<Props> = (props) => {
   const { activeCount, completedCount, onClearCompleted } = props;
   const itemWord = activeCount === 1 ? "item" : "items";
   return (
@@ -25,7 +23,7 @@ const Footer: FunctionComponent = (props) => {
         <strong>{activeCount || "No"}</strong> {itemWord} left
       </span>
       <ul className="filters">
-        {Object.keys(FILTER_TITLES).map((filter) => (
+        {(Object.keys(FILTER_TITLES) as VisibilityFilter[]).map((filter) => (
           <li key={filter}>
             <Link filter={filter}>{FILTER_TITLES[filter]}</Link>
           </li>
@@ -38,12 +36,6 @@ const Footer: FunctionComponent = (props) => {
       )}
     </footer>
   );
-};
-
-Footer.propTypes = {
-  completedCount: PropTypes.number.isRequired,
-  activeCount: PropTypes.number.isRequired,
-  onClearCompleted: PropTypes.func.isRequired,
 };
 
 export default Footer;

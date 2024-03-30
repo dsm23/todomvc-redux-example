@@ -1,58 +1,66 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import { Component } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import type {
+  ChangeEventHandler,
+  FocusEventHandler,
+  FunctionComponent,
+  InputHTMLAttributes,
+  KeyboardEventHandler,
+} from "react";
 import cx from "clsx";
 
-export default class TodoTextInput extends Component {
-  static propTypes = {
-    onSave: PropTypes.func.isRequired,
-    text: PropTypes.string,
-    placeholder: PropTypes.string,
-    editing: PropTypes.bool,
-    newTodo: PropTypes.bool,
-  };
+type Props = InputHTMLAttributes<HTMLInputElement> & {
+  onSave: (text: string) => void;
+  text?: string;
+  editing?: boolean;
+  newTodo?: boolean;
+};
 
-  state = {
-    text: this.props.text || "",
-  };
+const TodoTextInput: FunctionComponent<Props> = ({
+  className,
+  editing,
+  newTodo,
+  onSave,
+  ...props
+}) => {
+  const [text, setText] = useState(props.text || "");
 
-  handleSubmit = (e) => {
-    const text = e.target.value.trim();
-    if (e.which === 13) {
-      this.props.onSave(text);
-      if (this.props.newTodo) {
-        this.setState({ text: "" });
+  const handleSubmit: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    const newText = e.currentTarget.value.trim();
+
+    if (e.key === "Enter") {
+      onSave(newText);
+      if (newTodo) {
+        setText("");
       }
     }
   };
 
-  handleChange = (e) => {
-    this.setState({ text: e.target.value });
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setText(e.target.value);
   };
 
-  handleBlur = (e) => {
-    if (!this.props.newTodo) {
-      this.props.onSave(e.target.value);
+  const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+    if (!newTodo) {
+      onSave(e.target.value);
     }
   };
 
-  render() {
-    return (
-      <input
-        className={cx({
-          edit: this.props.editing,
-          "new-todo": this.props.newTodo,
-        })}
-        type="text"
-        placeholder={this.props.placeholder}
-        autoFocus={true}
-        value={this.state.text}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onKeyDown={this.handleSubmit}
-      />
-    );
-  }
-}
+  return (
+    <input
+      {...props}
+      className={cx({
+        edit: editing,
+        "new-todo": newTodo,
+        className,
+      })}
+      type="text"
+      autoFocus
+      value={text}
+      onBlur={handleBlur}
+      onChange={handleChange}
+      onKeyDown={handleSubmit}
+    />
+  );
+};
+
+export default TodoTextInput;
