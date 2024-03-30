@@ -35,33 +35,31 @@ const todosSlice = createSlice({
       });
     },
     deleteTodo(state, action: PayloadAction<Pick<Todo, "id">>) {
-      state.value = state.value.filter((todo) => todo.id !== action.payload.id);
-
-      // state.value.splice(
-      //   state.value.findIndex((todo) => todo.id !== action.payload.id),
-      // );
+      state.value.splice(
+        state.value.findIndex((todo) => todo.id === action.payload.id),
+        1,
+      );
     },
     editTodo(state, action: PayloadAction<Pick<Todo, "id" | "text">>) {
-      state.value = state.value.map((todo) =>
-        todo.id === action.payload.id
-          ? { ...todo, text: action.payload.text }
-          : todo,
-      );
+      for (const todo of state.value) {
+        if (todo.id === action.payload.id) {
+          todo.text = action.payload.text;
+        }
+      }
     },
     completeTodo(state, action: PayloadAction<Pick<Todo, "id">>) {
-      state.value = state.value.map((todo) =>
-        todo.id === action.payload.id
-          ? { ...todo, completed: !todo.completed }
-          : todo,
-      );
+      for (const todo of state.value) {
+        if (todo.id === action.payload.id) {
+          todo.completed = !todo.completed;
+        }
+      }
     },
     completeAllTodos(state) {
       const areAllMarked = state.value.every((todo) => todo.completed);
 
-      state.value = state.value.map((todo) => ({
-        ...todo,
-        completed: !areAllMarked,
-      }));
+      for (const todo of state.value) {
+        todo.completed = !areAllMarked;
+      }
     },
     clearCompleted(state) {
       state.value = state.value.filter((todo) => todo.completed === false);
