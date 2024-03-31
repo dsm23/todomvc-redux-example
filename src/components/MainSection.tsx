@@ -11,6 +11,8 @@ import {
 } from "~/features/todos/slice";
 import { getCompletedTodoCount } from "~/selectors";
 
+import styles from "./MainSection.module.css";
+
 const MainSection = () => {
   const dispatch = useAppDispatch();
   const completedCount = useAppSelector(getCompletedTodoCount);
@@ -22,12 +24,12 @@ const MainSection = () => {
 
   const handleClearCompleted = () => dispatch(clearCompleted());
 
-  return (
-    <section className="main">
+  return todosCount === 0 ? null : (
+    <section className={styles.main}>
       {!!todosCount && (
         <span>
           <input
-            className="toggle-all"
+            className={styles.toggleAll}
             type="checkbox"
             checked={completedCount === todosCount}
             readOnly

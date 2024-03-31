@@ -2,6 +2,8 @@ import type { FunctionComponent } from "react";
 import Link from "./Link";
 import { VisibilityFilter, filters } from "~/features/visibility-filter/slice";
 
+import styles from "./Footer.module.css";
+
 const FILTER_TITLES = {
   [filters.SHOW_ALL]: "All",
   [filters.SHOW_ACTIVE]: "Active",
@@ -18,11 +20,11 @@ const Footer: FunctionComponent<Props> = (props) => {
   const { activeCount, completedCount, onClearCompleted } = props;
   const itemWord = activeCount === 1 ? "item" : "items";
   return (
-    <footer className="footer">
-      <span className="todo-count">
-        <strong>{activeCount || "No"}</strong> {itemWord} left
+    <footer className={styles.footer}>
+      <span className={styles.todoCount}>
+        <strong>{activeCount || "No"}</strong> {itemWord} left!
       </span>
-      <ul className="filters">
+      <ul className={styles.filters}>
         {(Object.keys(FILTER_TITLES) as VisibilityFilter[]).map((filter) => (
           <li key={filter}>
             <Link filter={filter}>{FILTER_TITLES[filter]}</Link>
@@ -30,7 +32,7 @@ const Footer: FunctionComponent<Props> = (props) => {
         ))}
       </ul>
       {!!completedCount && (
-        <button className="clear-completed" onClick={onClearCompleted}>
+        <button className={styles.clearCompleted} onClick={onClearCompleted}>
           Clear completed
         </button>
       )}

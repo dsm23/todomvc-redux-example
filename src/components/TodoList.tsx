@@ -5,11 +5,13 @@ import TodoItem from "./TodoItem";
 import { useAppSelector } from "~/app/hooks";
 import { getVisibleTodos } from "~/selectors";
 
+import styles from "./TodoList.module.css";
+
 const TodoList = () => {
   const filteredTodos = useAppSelector(getVisibleTodos);
 
   return (
-    <ul className="todo-list">
+    <ul className={styles.todoList}>
       {filteredTodos.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}

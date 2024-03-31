@@ -68,8 +68,8 @@ describe("components", () => {
         const { container } = setup();
 
         expect(container.querySelector("footer")).toBeInTheDocument();
-        expect(screen.getByText("item left")).toBeInTheDocument();
-        expect(screen.queryByText("items left")).not.toBeInTheDocument();
+        expect(screen.getByText("item left!")).toBeInTheDocument();
+        expect(screen.queryByText("items left!")).not.toBeInTheDocument();
       });
 
       it("onClearCompleted should call clearCompleted", async () => {

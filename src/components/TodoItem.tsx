@@ -5,6 +5,8 @@ import { completeTodo, deleteTodo, editTodo } from "~/features/todos/slice";
 import { useAppDispatch } from "~/app/hooks";
 import TodoTextInput from "./TodoTextInput";
 
+import styles from "./TodoItem.module.css";
+
 type Todo = {
   text: string;
   completed: boolean;
@@ -55,7 +57,7 @@ const TodoItem: FunctionComponent<Props> = ({ todo }) => {
       <div className="view">
         <input
           id={htmlId}
-          className="toggle"
+          className={styles.toggle}
           type="checkbox"
           checked={todo.completed}
           onChange={handleChange}
@@ -63,16 +65,16 @@ const TodoItem: FunctionComponent<Props> = ({ todo }) => {
         <label htmlFor={htmlId} onDoubleClick={handleDoubleClick}>
           {todo.text}
         </label>
-        <button className="destroy" onClick={handleClick} />
+        <button className={styles.destroy} onClick={handleClick} />
       </div>
     );
   }
 
   return (
     <li
-      className={cx({
-        completed: todo.completed,
-        editing,
+      className={cx(styles.todoItem, {
+        [styles.completed]: todo.completed,
+        [styles.editing]: editing,
       })}
     >
       {element}

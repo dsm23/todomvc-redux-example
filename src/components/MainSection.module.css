@@ -1,0 +1,50 @@
+.main {
+  z-index: 2;
+  position: relative;
+  border-top: 1px solid #e6e6e6;
+}
+
+.toggleAll {
+  position: absolute;
+  right: 100%;
+  bottom: 100%;
+  width: 1px;
+  height: 1px;
+  border: none; /* Mobile Safari */
+  opacity: 0;
+}
+
+.toggleAll + label {
+  display: flex;
+  position: absolute;
+  top: -65px;
+  left: -0;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 65px;
+  font-size: 0;
+}
+
+.toggleAll + label:before {
+  display: inline-block;
+  padding: 10px 27px 10px 27px;
+  transform: rotate(90deg);
+  content: "❯";
+  color: #949494;
+  font-size: 22px;
+}
+
+.toggleAll:checked + label:before {
+  color: #484848;
+}
+
+/*
+	Hack to remove background from Mobile Safari.
+	Can't use it globally since it destroys checkboxes in Firefox
+*/
+@media screen and (min-resolution: 0) {
+  .toggle-all {
+    background: none;
+  }
+}

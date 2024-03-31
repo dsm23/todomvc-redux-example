@@ -4,6 +4,8 @@ import { deleteTodo } from "~/features/todos/slice";
 import TodoItem from "./TodoItem";
 import { renderWithProviders } from "~/test-utils";
 
+import styles from "./TodoItem.module.css";
+
 vi.mock("~/app/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("~/app/hooks")>();
 
@@ -76,7 +78,7 @@ describe("components", () => {
 
       fireEvent.doubleClick(label);
 
-      expect(container.querySelector("li")).toHaveClass("editing");
+      expect(container.querySelector("li")).toHaveClass(styles.editing);
     });
 
     // it("edit state render", () => {
