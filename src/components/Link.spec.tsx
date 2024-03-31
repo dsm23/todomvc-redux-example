@@ -5,6 +5,8 @@ import { setVisibilityFilter } from "~/features/visibility-filter/slice";
 import Link from "./Link";
 import { renderWithProviders } from "~/test-utils";
 
+import styles from "./Link.module.css";
+
 vi.mock("~/app/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("~/app/hooks")>();
 
@@ -53,7 +55,7 @@ describe("component", () => {
       setup();
 
       expect(screen.getByText("All", { selector: "a" })).toHaveClass(
-        "selected",
+        styles.selected,
       );
     });
 

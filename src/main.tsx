@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { setupStore } from "~/app/store";
 import App from "./components/App";
-import "todomvc-app-css/index.css";
+
+import "./index.css";
 
 createRoot(document.getElementById("root") as HTMLHtmlElement).render(
   <StrictMode>

@@ -1,0 +1,16 @@
+.link {
+  margin: 3px;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover {
+  border-color: #db7676;
+}
+
+.link.selected {
+  border-color: #ce4646;
+}

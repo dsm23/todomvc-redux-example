@@ -2,12 +2,12 @@ plugins:
   - prettier-plugin-css-order
   - prettier-plugin-tailwindcss
 cssDeclarationSorterOrder: smacss
-# tailwindConfig: ./tailwind.config.ts
-# tailwindFunctions:
-#   - clsx
-#   - cn
-#   - cva
-#   - cx
+tailwindConfig: ./tailwind.config.ts
+tailwindFunctions:
+  - clsx
+  - cn
+  - cva
+  - cx
 overrides:
   - files:
       - "*.jsonc"

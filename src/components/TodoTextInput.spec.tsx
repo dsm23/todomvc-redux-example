@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 import TodoTextInput from "./TodoTextInput";
 import { render } from "~/test-utils";
 
+import styles from "./TodoTextInput.module.css";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setup = (props?: any) => {
   const defaultProps = {
@@ -35,13 +37,13 @@ describe("components", () => {
     it("should render correctly when editing=true", () => {
       setup({ editing: true });
 
-      expect(screen.getByDisplayValue("Use Redux")).toHaveClass("edit");
+      expect(screen.getByDisplayValue("Use Redux")).toHaveClass(styles.edit);
     });
 
     it("should render correctly when newTodo=true", () => {
       setup({ newTodo: true });
 
-      expect(screen.getByDisplayValue("Use Redux")).toHaveClass("new-todo");
+      expect(screen.getByDisplayValue("Use Redux")).toHaveClass(styles.newTodo);
     });
 
     it("should update value on change", async () => {

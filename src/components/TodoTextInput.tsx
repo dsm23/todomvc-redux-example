@@ -8,6 +8,8 @@ import type {
 } from "react";
 import cx from "clsx";
 
+import styles from "./TodoTextInput.module.css";
+
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   onSave: (text: string) => void;
   text?: string;
@@ -48,9 +50,9 @@ const TodoTextInput: FunctionComponent<Props> = ({
   return (
     <input
       {...props}
-      className={cx({
-        edit: editing,
-        "new-todo": newTodo,
+      className={cx(styles.input, {
+        [styles.edit]: editing,
+        [styles.newTodo]: newTodo,
         className,
       })}
       type="text"

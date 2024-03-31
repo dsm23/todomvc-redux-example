@@ -28,7 +28,7 @@ describe("components", () => {
 
       expect(
         screen.getByText(
-          (_, element) => element?.textContent === "No items left",
+          (_, element) => element?.textContent === "No items left!",
         ),
       ).toBeInTheDocument();
     });
@@ -38,7 +38,7 @@ describe("components", () => {
 
       expect(
         screen.getByText(
-          (_, element) => element?.textContent === "1 item left",
+          (_, element) => element?.textContent === "1 item left!",
         ),
       ).toBeInTheDocument();
     });
