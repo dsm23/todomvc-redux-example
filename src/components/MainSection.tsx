@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Footer from "./Footer";
 import VisibleTodoList from "./TodoList";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
@@ -24,7 +25,9 @@ const MainSection = () => {
 
   const handleClearCompleted = () => dispatch(clearCompleted());
 
-  return todosCount === 0 ? null : (
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
     <section className={styles.main}>
       {!!todosCount && (
         <span>
@@ -38,13 +41,35 @@ const MainSection = () => {
         </span>
       )}
       <VisibleTodoList />
-      {!!todosCount && (
-        <Footer
-          completedCount={completedCount}
-          activeCount={todosCount - completedCount}
-          onClearCompleted={handleClearCompleted}
-        />
-      )}
+      <AnimatePresence initial={false}>
+        {!!todosCount && (
+          <motion.div
+            className="grid transition-[grid-template-rows]"
+            initial={{
+              gridTemplateRows: prefersReducedMotion ? "1fr" : "0fr",
+            }}
+            animate={{
+              gridTemplateRows: "1fr",
+            }}
+            exit={{
+              gridTemplateRows: prefersReducedMotion ? "1fr" : "0fr",
+            }}
+            transition={{
+              type: "spring",
+              duration: prefersReducedMotion ? 0 : 0.3,
+              ease: "easeInOut",
+            }}
+          >
+            <div className="overflow-hidden">
+              <Footer
+                completedCount={completedCount}
+                activeCount={todosCount - completedCount}
+                onClearCompleted={handleClearCompleted}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
