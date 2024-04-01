@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import { RootState } from "~/app/store";
-import MainSection from "./MainSection";
+import MainSection from ".";
 import { clearCompleted } from "~/features/todos/slice";
 import { renderWithProviders } from "~/test-utils";
 

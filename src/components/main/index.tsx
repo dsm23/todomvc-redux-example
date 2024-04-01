@@ -2,9 +2,9 @@
 // @ts-nocheck
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import Footer from "./Footer";
-import VisibleTodoList from "./TodoList";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import Footer from "~/components/footer";
+import VisibleTodoList from "~/components/todo-list";
 import {
   clearCompleted,
   completeAllTodos,
@@ -12,7 +12,7 @@ import {
 } from "~/features/todos/slice";
 import { getCompletedTodoCount } from "~/selectors";
 
-import styles from "./MainSection.module.css";
+import styles from "./styles.module.css";
 
 const MainSection = () => {
   const dispatch = useAppDispatch();

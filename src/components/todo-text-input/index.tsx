@@ -8,7 +8,7 @@ import type {
 } from "react";
 import cx from "clsx";
 
-import styles from "./TodoTextInput.module.css";
+import styles from "./styles.module.css";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   onSave: (text: string) => void;

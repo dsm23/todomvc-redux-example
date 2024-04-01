@@ -2,10 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { setVisibilityFilter } from "~/features/visibility-filter/slice";
-import Link from "./Link";
+import Link from ".";
 import { renderWithProviders } from "~/test-utils";
 
-import styles from "./Link.module.css";
+import styles from "./styles.module.css";
 
 vi.mock("~/app/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("~/app/hooks")>();

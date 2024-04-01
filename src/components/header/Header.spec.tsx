@@ -3,7 +3,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Header from "./Header";
+import Header from ".";
 import { addTodo } from "~/features/todos/slice";
 import { renderWithProviders } from "~/test-utils";
 

@@ -1,8 +1,8 @@
 import type { FunctionComponent } from "react";
-import Header from "../components/Header";
-import MainSection from "../components/MainSection";
+import Header from "~/components/header";
+import MainSection from "~/components/main";
 
-import styles from "./App.module.css";
+import styles from "./styles.module.css";
 
 const App: FunctionComponent = () => (
   <>
