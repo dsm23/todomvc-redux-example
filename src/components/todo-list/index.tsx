@@ -2,11 +2,11 @@
 // @ts-nocheck
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import TodoItem from "./TodoItem";
+import TodoItem from "~/components/todo-item";
 import { useAppSelector } from "~/app/hooks";
 import { getVisibleTodos } from "~/selectors";
 
-import styles from "./TodoList.module.css";
+import styles from "./styles.module.css";
 
 const TodoList = () => {
   const filteredTodos = useAppSelector(getVisibleTodos);

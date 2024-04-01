@@ -7,7 +7,7 @@ import {
 } from "~/features/visibility-filter/slice";
 import type { VisibilityFilter } from "~/features/visibility-filter/slice";
 
-import styles from "./Link.module.css";
+import styles from "./styles.module.css";
 
 type Props = {
   children: ReactNode;

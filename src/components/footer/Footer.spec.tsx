@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import Footer from "./Footer";
+import Footer from ".";
 import { renderWithProviders } from "~/test-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
