@@ -21,12 +21,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@2
+        uses: step-security/harden-runner@v2
         with:
           egress-policy: audit
 
       - name: Git Checkout
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
 
       - name: Review Dependencies
-        uses: actions/dependency-review-action@4
+        uses: actions/dependency-review-action@v4

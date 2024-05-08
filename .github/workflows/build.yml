@@ -12,7 +12,8 @@ jobs:
     env:
       node-version: 22.1.0
     steps:
-      - uses: actions/checkout@v4
+      - name: Git Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v3
