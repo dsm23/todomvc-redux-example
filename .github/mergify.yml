@@ -3,6 +3,7 @@ pull_request_rules:
   - name: automatic approval
     conditions:
       - author=dsm23
+      - check-success=analyze
       - check-success=build
       - check-success=dependency-review
     actions:
@@ -20,6 +21,7 @@ pull_request_rules:
   # merge
   - name: Automatically merge when GitHub Actions jobs succeed
     conditions:
+      - check-success=analyze
       - check-success=build
       - check-success=dependency-review
       - "#approved-reviews-by>=1"
