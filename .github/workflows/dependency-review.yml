@@ -18,6 +18,7 @@ permissions:
 
 jobs:
   dependency-review:
+    name: Review Dependencies
     runs-on: ubuntu-22.04
     steps:
       - name: Harden Runner

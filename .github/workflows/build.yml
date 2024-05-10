@@ -8,6 +8,7 @@ on:
       - synchronize
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-22.04
     env:
       node-version: 22.1.0

@@ -27,8 +27,8 @@ permissions:
   contents: read
 
 jobs:
-  analyze:
-    name: Analyze
+  analyse:
+    name: Analyse
     runs-on: ubuntu-22.04
     permissions:
       actions: read
