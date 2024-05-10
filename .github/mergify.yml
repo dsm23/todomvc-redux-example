@@ -3,10 +3,10 @@ pull_request_rules:
   - name: automatic approval
     conditions:
       - author=dsm23
-      - check-success=Build
-      - check-success=Analyse
-      - check-success=Review Dependencies
-      - check-success=Playwright
+      - check-success~=analyse \([a-z]*\)
+      - check-success=build
+      - check-success=dependency-review
+      - check-success~=playwright-tests \(\d, \d\)
     actions:
       review:
         type: APPROVE
@@ -14,10 +14,10 @@ pull_request_rules:
   - name: automatic approval for Dependabot pull requests
     conditions:
       - author=dependabot[bot]
-      - check-success=Build
-      - check-success=Analyse
-      - check-success=Review Dependencies
-      - check-success=Playwright
+      - check-success~=analyse \([a-z]*\)
+      - check-success=build
+      - check-success=dependency-review
+      - check-success~=playwright-tests \(\d, \d\)
     actions:
       review:
         type: APPROVE
@@ -25,10 +25,10 @@ pull_request_rules:
   # merge
   - name: Automatically merge when GitHub Actions jobs succeed
     conditions:
-      - check-success=Build
-      - check-success=Analyse
-      - check-success=Review Dependencies
-      - check-success=Playwright
+      - check-success~=analyse \([a-z]*\)
+      - check-success=build
+      - check-success=dependency-review
+      - check-success~=playwright-tests \(\d, \d\)
       - "#approved-reviews-by>=1"
     actions:
       merge:
