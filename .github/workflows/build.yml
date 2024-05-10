@@ -36,5 +36,7 @@ jobs:
         run: pnpm run lint
       - name: Unit tests
         run: pnpm run test
+      - name: Unit test coverage
+        run: pnpm run coverage
       - name: build check
         run: pnpm run build
