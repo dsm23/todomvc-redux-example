@@ -3,9 +3,11 @@ pull_request_rules:
   - name: automatic approval
     conditions:
       - author=dsm23
-      - check-success=analyze
+      - check-success=analyze (javascript)
+      - check-success=analyze (typescript)
       - check-success=build
       - check-success=dependency-review
+      - check-success=playwright-tests
     actions:
       review:
         type: APPROVE
@@ -21,9 +23,11 @@ pull_request_rules:
   # merge
   - name: Automatically merge when GitHub Actions jobs succeed
     conditions:
-      - check-success=analyze
+      - check-success=analyze (javascript)
+      - check-success=analyze (typescript)
       - check-success=build
       - check-success=dependency-review
+      - check-success=playwright-tests
       - "#approved-reviews-by>=1"
     actions:
       merge:
