@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@playwright/test": "^1.44.0",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^14.5.2",
@@ -48,6 +49,7 @@
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "playwright": "playwright",
     "preview": "vite preview",
     "coverage": "vitest run --coverage",
     "test": "vitest",
