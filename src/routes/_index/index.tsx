@@ -1,6 +1,5 @@
 import type { FunctionComponent } from "react";
 import type { MetaFunction } from "@remix-run/node";
-import refTodosImg from "~/assets/todos.svg";
 import Header from "~/components/header";
 import MainSection from "~/components/main";
 
@@ -19,7 +18,11 @@ export const meta: MetaFunction = () => {
       content:
         "TodoMVC example application written using React, Redux and Remix",
     },
-    { name: "og:image", content: refTodosImg },
+    {
+      name: "og:image",
+      content:
+        "https://upload.wikimedia.org/wikipedia/commons/5/5d/GNOME_Todo_icon_2019.svg",
+    },
   ];
 };
 
