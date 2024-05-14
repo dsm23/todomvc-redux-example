@@ -1,6 +1,6 @@
 [build]
 command = "pnpm run build"
-publish = "build/client"
+publish = "dist/client"
 
 [dev]
 command = "pnpm run dev"
@@ -9,7 +9,7 @@ framework = "vite"
 # Set immutable caching for static files, because they have fingerprinted filenames
 
 [[headers]]
-for = "/build/*"
+for = "/dist/*"
 
 [headers.values]
 
