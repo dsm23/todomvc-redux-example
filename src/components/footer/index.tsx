@@ -1,6 +1,9 @@
 import type { FunctionComponent } from "react";
-import Link from "~/components/link";
-import { VisibilityFilter, filters } from "~/features/visibility-filter/slice";
+import Link from "src/components/link";
+import {
+  VisibilityFilter,
+  filters,
+} from "src/features/visibility-filter/slice";
 
 import styles from "./styles.module.css";
 

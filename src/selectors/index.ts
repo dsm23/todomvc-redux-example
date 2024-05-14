@@ -5,8 +5,8 @@ import {
   SHOW_ACTIVE,
 } from "../constants/TodoFilters";
 
-import { getTodos } from "~/features/todos/slice";
-import { getVisibilityFilter } from "~/features/visibility-filter/slice";
+import { getTodos } from "src/features/todos/slice";
+import { getVisibilityFilter } from "src/features/visibility-filter/slice";
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],

@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import {
   getVisibilityFilter,
   setVisibilityFilter,
-} from "~/features/visibility-filter/slice";
-import type { VisibilityFilter } from "~/features/visibility-filter/slice";
+} from "src/features/visibility-filter/slice";
+import type { VisibilityFilter } from "src/features/visibility-filter/slice";
 
 import styles from "./styles.module.css";
 
