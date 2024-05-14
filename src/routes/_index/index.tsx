@@ -1,7 +1,8 @@
 import type { FunctionComponent } from "react";
 import type { MetaFunction } from "@remix-run/node";
-import Header from "src/components/header";
-import MainSection from "src/components/main";
+import refTodosImg from "~/assets/todos.svg";
+import Header from "~/components/header";
+import MainSection from "~/components/main";
 
 import styles from "./styles.module.css";
 
@@ -9,7 +10,16 @@ import styles from "./styles.module.css";
 export const meta: MetaFunction = () => {
   return [
     { title: "Redux TodoMVC Example" },
-    { name: "description", content: "Welcome to Remix!" },
+    {
+      property: "og:title",
+      content: "Redux TodoMVC Example",
+    },
+    {
+      name: "description",
+      content:
+        "TodoMVC example application written using React, Redux and Remix",
+    },
+    { name: "og:image", content: refTodosImg },
   ];
 };
 
