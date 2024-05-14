@@ -3,14 +3,14 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "~/app/hooks";
-import Footer from "~/components/footer";
-import VisibleTodoList from "~/components/todo-list";
+import Footer from "src/components/footer";
+import VisibleTodoList from "src/components/todo-list";
 import {
   clearCompleted,
   completeAllTodos,
   getTodos,
-} from "~/features/todos/slice";
-import { getCompletedTodoCount } from "~/selectors";
+} from "src/features/todos/slice";
+import { getCompletedTodoCount } from "src/selectors";
 
 import styles from "./styles.module.css";
 

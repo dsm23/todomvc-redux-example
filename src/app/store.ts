@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import todos from "~/features/todos/slice";
-import visibilityFilter from "~/features/visibility-filter/slice";
+import todos from "src/features/todos/slice";
+import visibilityFilter from "src/features/visibility-filter/slice";
 
 const rootReducer = combineReducers({
   todos,

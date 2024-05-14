@@ -2,9 +2,9 @@
 // @ts-nocheck
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import TodoItem from "~/components/todo-item";
+import TodoItem from "src/components/todo-item";
 import { useAppSelector } from "~/app/hooks";
-import { getVisibleTodos } from "~/selectors";
+import { getVisibleTodos } from "src/selectors";
 
 import styles from "./styles.module.css";
 
