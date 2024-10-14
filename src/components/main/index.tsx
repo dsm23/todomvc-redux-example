@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import { useId } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Footer from "src/components/footer";
 import VisibleTodoList from "src/components/todo-list";
@@ -14,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import styles from "./styles.module.css";
 
 const MainSection = () => {
+  const id = useId();
   const dispatch = useAppDispatch();
   const completedCount = useAppSelector(getCompletedTodoCount);
   const todos = useAppSelector(getTodos);
@@ -31,12 +33,15 @@ const MainSection = () => {
       {!!todosCount && (
         <span>
           <input
+            id={id}
             className={styles.toggleAll}
             type="checkbox"
             checked={completedCount === todosCount}
             readOnly
           />
-          <label onClick={handleClick} />
+          <label htmlFor={id} onClick={handleClick}>
+            Toggle all
+          </label>
         </span>
       )}
       <VisibleTodoList />

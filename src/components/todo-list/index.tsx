@@ -16,7 +16,7 @@ const TodoList = () => {
     <ul className={styles.todoList}>
       <AnimatePresence initial={false}>
         {filteredTodos.map((todo) => (
-          <motion.div
+          <motion.li
             key={todo.id}
             className="grid transition-[grid-template-rows]"
             initial={{
@@ -37,7 +37,7 @@ const TodoList = () => {
             <div className="overflow-hidden">
               <TodoItem todo={todo} />
             </div>
-          </motion.div>
+          </motion.li>
         ))}
       </AnimatePresence>
     </ul>

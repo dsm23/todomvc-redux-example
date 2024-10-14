@@ -70,14 +70,14 @@ const TodoItem: FunctionComponent<Props> = ({ todo }) => {
   }
 
   return (
-    <li
+    <div
       className={cx(styles.todoItem, {
         [styles.completed]: todo.completed,
         [styles.editing]: editing,
       })}
     >
       {element}
-    </li>
+    </div>
   );
 };
 
