@@ -2,7 +2,6 @@ import type { FunctionComponent } from "react";
 import type { MetaFunction } from "@remix-run/node";
 import Header from "~/components/header";
 import MainSection from "~/components/main";
-
 import styles from "./styles.module.css";
 
 // eslint-disable-next-line react-refresh/only-export-components

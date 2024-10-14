@@ -1,10 +1,9 @@
 import type { FunctionComponent } from "react";
 import Link from "src/components/link";
 import {
-  VisibilityFilter,
   filters,
+  VisibilityFilter,
 } from "src/features/visibility-filter/slice";
-
 import styles from "./styles.module.css";
 
 const FILTER_TITLES = {

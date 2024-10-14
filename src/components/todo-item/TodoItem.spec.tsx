@@ -1,9 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import { deleteTodo } from "src/features/todos/slice";
-import TodoItem from ".";
 import { renderWithProviders } from "src/test-utils";
-
+import TodoItem from ".";
 import styles from "./styles.module.css";
 
 vi.mock("~/app/hooks", async (importOriginal) => {

@@ -3,9 +3,8 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import TodoItem from "src/components/todo-item";
-import { useAppSelector } from "~/app/hooks";
 import { getVisibleTodos } from "src/selectors";
-
+import { useAppSelector } from "~/app/hooks";
 import styles from "./styles.module.css";
 
 const TodoList = () => {

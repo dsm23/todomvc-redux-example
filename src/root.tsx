@@ -5,10 +5,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
 import { Provider } from "react-redux";
-import stylesheet from "./index.css?url";
+import type { LinksFunction } from "@remix-run/node";
 import { setupStore } from "./app/store";
+import stylesheet from "./index.css?url";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const links: LinksFunction = () => [
