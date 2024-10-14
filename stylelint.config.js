@@ -43,10 +43,18 @@ export default {
     // cssDeclarationSorterOrder: smacss
     "order/properties-order": [
       {
-        properties: ["position", "top", "right", "bottom", "left", "z-index"],
+        properties: [
+          "z-index",
+          "display",
+          "position",
+          "top",
+          "right",
+          "bottom",
+          "left",
+        ],
       },
       {
-        properties: ["display", "visibility", "float", "clear"],
+        properties: ["visibility", "float", "clear"],
       },
       {
         properties: [
@@ -57,8 +65,8 @@ export default {
           "flex-basis",
           "flex-grow",
           "flex-shrink",
-          "justify-content",
           "align-items",
+          "justify-content",
           "align-self",
           "order",
         ],
