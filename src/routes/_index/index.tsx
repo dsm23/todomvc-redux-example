@@ -31,7 +31,9 @@ const Index: FunctionComponent = () => (
       <Header />
       <MainSection />
     </main>
-    <p className="text-center leading-none">Double-click to edit a todo</p>
+    <aside>
+      <p className="text-center leading-none">Double-click to edit a todo</p>
+    </aside>
   </>
 );
 

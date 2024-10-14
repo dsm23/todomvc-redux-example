@@ -43,7 +43,7 @@ describe("components", () => {
     it("initial render", () => {
       const { container } = setup();
 
-      expect(container.querySelector("li")).toBeInTheDocument();
+      expect(container.querySelector("div")).toBeInTheDocument();
 
       const checkbox = container.querySelector('input[type="checkbox"]');
 
@@ -77,7 +77,7 @@ describe("components", () => {
 
       fireEvent.doubleClick(label);
 
-      expect(container.querySelector("li")).toHaveClass(styles.editing);
+      expect(container.querySelector("div")).toHaveClass(styles.editing);
     });
 
     // it("edit state render", () => {
