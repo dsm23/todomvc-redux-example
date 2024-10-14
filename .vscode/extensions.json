@@ -6,6 +6,9 @@
   "recommendations": [
     "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "joshbolduc.commitlint",
+    "ms-playwright.playwright"
   ]
 }
