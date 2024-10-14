@@ -5,6 +5,9 @@
   "sideEffects": false,
   "type": "module",
   "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/types": "^19.5.0",
     "@playwright/test": "^1.48.0",
     "@remix-run/dev": "^2.9.2",
     "@testing-library/jest-dom": "^6.4.5",
