@@ -1,9 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import TodoTextInput from ".";
 import { render } from "src/test-utils";
-
+import TodoTextInput from ".";
 import styles from "./styles.module.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

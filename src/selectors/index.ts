@@ -1,12 +1,11 @@
 import { createSelector } from "reselect";
-import {
-  SHOW_ALL,
-  SHOW_COMPLETED,
-  SHOW_ACTIVE,
-} from "../constants/TodoFilters";
-
 import { getTodos } from "src/features/todos/slice";
 import { getVisibilityFilter } from "src/features/visibility-filter/slice";
+import {
+  SHOW_ACTIVE,
+  SHOW_ALL,
+  SHOW_COMPLETED,
+} from "../constants/TodoFilters";
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],

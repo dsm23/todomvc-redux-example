@@ -1,21 +1,33 @@
 plugins:
   - prettier-plugin-css-order
+  - "@ianvs/prettier-plugin-sort-imports"
   - prettier-plugin-tailwindcss
 cssDeclarationSorterOrder: smacss
-tailwindConfig: ./tailwind.config.ts
+importOrder:
+  - "^react$"
+  - "<TYPES>^(react)"
+  - "^vite$"
+  - "<TYPES>^(vite)"
+  - "^vitest$"
+  - "<TYPES>^(vitest)"
+  - "^clsx$"
+  - "<TYPES>^(clsx)"
+  - "^@*vite"
+  - "<TYPES>^(@*vite)"
+  - "<BUILTIN_MODULES>"
+  - "<TYPES>^(node:)"
+  - "<THIRD_PARTY_MODULES>"
+  - "<TYPES>^([@a-z])"
+  - "^~/(.*)$"
+  - "<TYPES>^~/(.*)"
+  - "^[.]"
+  - "<TYPES>"
+  - ""
+  - "^(?!.*[.]css$)[./].*$"
+  - ".css$"
+importOrderTypeScriptVersion: 5.6.3
 tailwindFunctions:
   - clsx
   - cn
   - cva
   - cx
-overrides:
-  - files:
-      - "*.jsonc"
-      - devcontainer.json
-      - jsconfig.json
-      - language-configuration.json
-      - tsconfig.json
-    options:
-      #  Use one of the following options
-      parser: json
-      trailingComma: none

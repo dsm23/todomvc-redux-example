@@ -7,7 +7,6 @@ import type {
   KeyboardEventHandler,
 } from "react";
 import cx from "clsx";
-
 import styles from "./styles.module.css";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {

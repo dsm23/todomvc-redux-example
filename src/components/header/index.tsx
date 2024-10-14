@@ -1,7 +1,6 @@
-import { useAppDispatch } from "~/app/hooks";
 import TodoTextInput from "src/components/todo-text-input";
 import { addTodo } from "src/features/todos/slice";
-
+import { useAppDispatch } from "~/app/hooks";
 import styles from "./styles.module.css";
 
 const Header = () => {

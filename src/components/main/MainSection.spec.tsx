@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import { RootState } from "~/app/store";
-import MainSection from ".";
 import { clearCompleted } from "src/features/todos/slice";
 import { renderWithProviders } from "src/test-utils";
+import { RootState } from "~/app/store";
+import MainSection from ".";
 
 vi.mock("~/app/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("~/app/hooks")>();
