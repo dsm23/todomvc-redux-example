@@ -26,16 +26,16 @@
   font-size: 0;
 }
 
-.toggleAll + label:before {
+.toggleAll + label::before {
   display: inline-block;
-  padding: 10px 27px 10px 27px;
+  padding: 10px 27px;
   transform: rotate(90deg);
   content: "❯";
   color: #949494;
   font-size: 22px;
 }
 
-.toggleAll:checked + label:before {
+.toggleAll:checked + label::before {
   color: #484848;
 }
 
@@ -44,7 +44,7 @@
 	Can't use it globally since it destroys checkboxes in Firefox
 */
 @media screen and (min-resolution: 0) {
-  .toggle-all {
+  .toggleAll {
     background: none;
   }
 }

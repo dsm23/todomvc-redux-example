@@ -30,14 +30,12 @@
   top: 0;
   bottom: 0;
   width: 40px;
+
   /* auto, since non-WebKit browsers doesn't support input styling */
   height: auto;
   margin: auto 0;
   border: none; /* Mobile Safari */
   text-align: center;
-}
-
-.todoItem .toggle {
   opacity: 0;
 }
 
@@ -89,7 +87,7 @@
   color: #c18585;
 }
 
-.todoItem .destroy:after {
+.todoItem .destroy::after {
   display: block;
   height: 100%;
   content: "×";
@@ -114,10 +112,7 @@
 */
 @media screen and (min-resolution: 0) {
   .todoItem .toggle {
-    background: none;
-  }
-
-  .todoItem .toggle {
     height: 40px;
+    background: none;
   }
 }
