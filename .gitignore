@@ -25,6 +25,11 @@ dist-ssr
 
 coverage
 
+# Cache Files
+.eslintmdcache
+.stylelintcache
+.prettiercache
+
 # Local Netlify folder
 .netlify
 
