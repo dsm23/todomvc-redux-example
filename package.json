@@ -5,7 +5,7 @@
   "sideEffects": false,
   "type": "module",
   "devDependencies": {
-    "@playwright/test": "^1.44.0",
+    "@playwright/test": "^1.48.0",
     "@remix-run/dev": "^2.9.2",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",

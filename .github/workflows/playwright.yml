@@ -9,6 +9,8 @@ jobs:
   playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-22.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.48.0-jammy
     env:
       node-version: 22.1.0
     strategy:
@@ -35,10 +37,11 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpm playwright install --with-deps
       - name: Run Playwright tests
         run: pnpm playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          # Required for firefox
+          HOME: /root
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
