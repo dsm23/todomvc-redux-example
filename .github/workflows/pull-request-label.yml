@@ -28,7 +28,7 @@ jobs:
   # this Workflow again
   remove_pull_request_label:
     name: Remove Pull Request Label
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@v2
