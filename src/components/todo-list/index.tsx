@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import TodoItem from "src/components/todo-item";
 import { getVisibleTodos } from "src/selectors";
 import { useAppSelector } from "~/app/hooks";
