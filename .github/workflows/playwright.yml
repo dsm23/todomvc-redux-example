@@ -32,8 +32,6 @@ jobs:
           egress-policy: audit
       - name: Git Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: pnpm/action-setup@v3
         with:
           version: 9
