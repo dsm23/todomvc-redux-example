@@ -90,10 +90,8 @@
     "test.ui": "vitest --ui",
     "typecheck": "tsc"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@9.15.3"
 }
