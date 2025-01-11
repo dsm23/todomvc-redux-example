@@ -1,9 +1,9 @@
 import { useId, useState } from "react";
 import type { FunctionComponent } from "react";
 import cx from "clsx";
-import TodoTextInput from "src/components/todo-text-input";
-import { completeTodo, deleteTodo, editTodo } from "src/features/todos/slice";
 import { useAppDispatch } from "~/app/hooks";
+import TodoTextInput from "~/components/todo-text-input";
+import { completeTodo, deleteTodo, editTodo } from "~/features/todos/slice";
 import styles from "./styles.module.css";
 
 type Todo = {

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
-import { deleteTodo } from "src/features/todos/slice";
-import { renderWithProviders } from "src/test-utils";
+import { deleteTodo } from "~/features/todos/slice";
+import { renderWithProviders } from "~/test-utils";
 import TodoItem from ".";
 import styles from "./styles.module.css";
 
@@ -15,7 +15,7 @@ vi.mock("~/app/hooks", async (importOriginal) => {
 });
 
 vi.mock("~/features/todos/slice", async (importOriginal) => {
-  const mod = await importOriginal<typeof import("src/features/todos/slice")>();
+  const mod = await importOriginal<typeof import("~/features/todos/slice")>();
 
   return {
     ...mod,

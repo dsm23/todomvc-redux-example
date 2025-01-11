@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { renderWithProviders } from "src/test-utils";
+import { renderWithProviders } from "~/test-utils";
 import App from ".";
 
 const setup = () => {

@@ -3,15 +3,15 @@
 
 import { useId } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import Footer from "src/components/footer";
-import VisibleTodoList from "src/components/todo-list";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
+import Footer from "~/components/footer";
+import VisibleTodoList from "~/components/todo-list";
 import {
   clearCompleted,
   completeAllTodos,
   getTodos,
-} from "src/features/todos/slice";
-import { getCompletedTodoCount } from "src/selectors";
-import { useAppDispatch, useAppSelector } from "~/app/hooks";
+} from "~/features/todos/slice";
+import { getCompletedTodoCount } from "~/selectors";
 import styles from "./styles.module.css";
 
 const MainSection = () => {

@@ -17,9 +17,7 @@ vi.mock("~/app/hooks", async (importOriginal) => {
 
 vi.mock("~/features/visibility-filter/slice", async (importOriginal) => {
   const mod =
-    await importOriginal<
-      typeof import("src/features/visibility-filter/slice")
-    >();
+    await importOriginal<typeof import("~/features/visibility-filter/slice")>();
 
   return {
     ...mod,

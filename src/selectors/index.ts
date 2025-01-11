@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
-import { getTodos } from "src/features/todos/slice";
-import { getVisibilityFilter } from "src/features/visibility-filter/slice";
+import { getTodos } from "~/features/todos/slice";
+import { getVisibilityFilter } from "~/features/visibility-filter/slice";
 import {
   SHOW_ACTIVE,
   SHOW_ALL,

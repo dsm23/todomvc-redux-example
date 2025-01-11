@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
-import { clearCompleted } from "src/features/todos/slice";
-import { renderWithProviders } from "src/test-utils";
 import { RootState } from "~/app/store";
+import { clearCompleted } from "~/features/todos/slice";
+import { renderWithProviders } from "~/test-utils";
 import MainSection from ".";
 
 vi.mock("~/app/hooks", async (importOriginal) => {
@@ -15,7 +15,7 @@ vi.mock("~/app/hooks", async (importOriginal) => {
 });
 
 vi.mock("~/features/todos/slice", async (importOriginal) => {
-  const mod = await importOriginal<typeof import("src/features/todos/slice")>();
+  const mod = await importOriginal<typeof import("~/features/todos/slice")>();
 
   return {
     ...mod,
