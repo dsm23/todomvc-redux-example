@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { useId } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Footer from "src/components/footer";
 import VisibleTodoList from "src/components/todo-list";
 import {
