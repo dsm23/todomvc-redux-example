@@ -1,11 +1,11 @@
 import type { FunctionComponent, ReactNode } from "react";
 import cx from "clsx";
+import { useAppDispatch, useAppSelector } from "~/app/hooks";
 import {
   getVisibilityFilter,
   setVisibilityFilter,
-} from "src/features/visibility-filter/slice";
-import type { VisibilityFilter } from "src/features/visibility-filter/slice";
-import { useAppDispatch, useAppSelector } from "~/app/hooks";
+} from "~/features/visibility-filter/slice";
+import type { VisibilityFilter } from "~/features/visibility-filter/slice";
 import styles from "./styles.module.css";
 
 type Props = {

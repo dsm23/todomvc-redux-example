@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "src/test-utils";
 import { RootState } from "~/app/store";
+import { renderWithProviders } from "~/test-utils";
 import TodoList from ".";
 
 const setup = (preloadedState?: Partial<RootState>) =>

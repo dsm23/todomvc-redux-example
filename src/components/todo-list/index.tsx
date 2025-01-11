@@ -2,9 +2,9 @@
 // @ts-nocheck
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import TodoItem from "src/components/todo-item";
-import { getVisibleTodos } from "src/selectors";
 import { useAppSelector } from "~/app/hooks";
+import TodoItem from "~/components/todo-item";
+import { getVisibleTodos } from "~/selectors";
 import styles from "./styles.module.css";
 
 const TodoList = () => {
