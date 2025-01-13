@@ -11,13 +11,14 @@ pull_request_rules:
       - check-success=lint
       - check-success~=playwright-tests \(\d, \d\)
       - check-success=unit-testing
+      - "#check-success>=17"
     actions:
       review:
         type: APPROVE
         message: Automatically approving dsm23
-  - name: automatic approval for Dependabot pull requests
+  - name: automatic approval for Renovate pull requests
     conditions:
-      - author=dependabot[bot]
+      - author=renovate[bot]
       - check-success~=analyse \([a-z]*\)
       - check-success=build
       - check-success=dependency-review
@@ -26,10 +27,11 @@ pull_request_rules:
       - check-success=lint
       - check-success~=playwright-tests \(\d, \d\)
       - check-success=unit-testing
+      - "#check-success>=17"
     actions:
       review:
         type: APPROVE
-        message: Automatically approving dependabot
+        message: Automatically approving renovate
   # merge
   - name: Automatically merge when GitHub Actions jobs succeed
     conditions:
@@ -41,6 +43,7 @@ pull_request_rules:
       - check-success=lint
       - check-success~=playwright-tests \(\d, \d\)
       - check-success=unit-testing
+      - "#check-success>=17"
       - "#approved-reviews-by>=1"
     actions:
       merge:
