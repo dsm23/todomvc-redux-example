@@ -1,15 +1,7 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { netlifyPlugin } from "@netlify/remix-edge-adapter/plugin";
-import { vitePlugin as remix } from "@remix-run/dev";
 
 export default defineConfig({
-  plugins: [
-    remix({
-      appDirectory: "src",
-      buildDirectory: "dist",
-    }),
-    netlifyPlugin(),
-    tsconfigPaths(),
-  ],
+  plugins: [react(), tsconfigPaths()],
 });
