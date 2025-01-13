@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderWithProviders } from "~/test-utils";
-import App from ".";
+import App from "./App";
 
 const setup = () => {
   return renderWithProviders(<App />);
