@@ -1,4 +1,4 @@
-name: Build
+name: Format check
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
   HUSKY: 0
 
 jobs:
-  build:
+  format:
     runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
@@ -47,5 +47,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: build check
-        run: pnpm run build
+      - name: Format check
+        run: pnpm run fmt.check
