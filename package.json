@@ -9,7 +9,7 @@
     "@commitlint/cli": "19.6.1",
     "@commitlint/config-conventional": "19.6.0",
     "@commitlint/types": "19.5.0",
-    "@eslint/compat": "1.2.5",
+    "@eslint/compat": "1.2.6",
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
     "@playwright/test": "1.49.1",
     "@testing-library/jest-dom": "6.6.3",
