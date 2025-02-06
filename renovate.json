@@ -14,7 +14,11 @@
     {
       "extends": ["monorepo:playwright"],
       "groupName": "playwright monorepo",
-      "matchManagers": ["github-actions", "npm"],
+      "matchPackageNames": [
+        "playwright",
+        "@playwright/test",
+        "mcr.microsoft.com/playwright"
+      ],
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     }
   ],
