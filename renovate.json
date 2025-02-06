@@ -12,7 +12,6 @@
   ],
   "packageRules": [
     {
-      "extends": ["monorepo:playwright"],
       "groupName": "playwright monorepo",
       "matchPackageNames": ["**playwright**"],
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
