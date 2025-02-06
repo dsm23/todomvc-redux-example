@@ -14,7 +14,7 @@
     {
       "extends": ["monorepo:playwright"],
       "groupName": "playwright monorepo",
-      "matchDatasources": ["docker", "npm", "github-releases", "github-tags"],
+      "matchManagers": ["github-actions", "npm"],
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     }
   ],
