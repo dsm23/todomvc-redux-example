@@ -13,7 +13,11 @@
   "packageRules": [
     {
       "groupName": "playwright monorepo",
-      "matchPackageNames": ["**playwright**"],
+      "matchPackageNames": [
+        "playwright",
+        "@playwright/test",
+        "mcr.microsoft.com/playwright"
+      ],
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     }
   ],
