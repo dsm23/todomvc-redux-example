@@ -51,3 +51,5 @@ jobs:
 
       - name: Unit test coverage
         run: pnpm run coverage
+        env:
+          FORCE_COLOR: 1
