@@ -4,17 +4,17 @@ pull_request_rules:
     conditions:
       - author=dsm23
       - check-success=amd64
-      - check-success~=analyse \([a-z]*\)
       - check-success=build
+      - check-success=codeql (javascript)
+      - check-success=codeql (typescript)
       - check-success=dependency-review
       - check-success=format
       - check-success=gitleaks
       - check-success=lint
-      - check-success~=playwright-tests \(\d, \d\)
+      - check-success=playwright-tests
       - check-success=pr-title
       - check-success=unit-testing
       - check-success=zizmor
-      - "#check-success>=20"
     actions:
       review:
         type: APPROVE
@@ -23,17 +23,17 @@ pull_request_rules:
     conditions:
       - author=renovate[bot]
       - check-success=amd64
-      - check-success~=analyse \([a-z]*\)
       - check-success=build
+      - check-success=codeql (javascript)
+      - check-success=codeql (typescript)
       - check-success=dependency-review
       - check-success=format
       - check-success=gitleaks
       - check-success=lint
-      - check-success~=playwright-tests \(\d, \d\)
+      - check-success=playwright-tests
       - check-success=pr-title
       - check-success=unit-testing
       - check-success=zizmor
-      - "#check-success>=20"
     actions:
       review:
         type: APPROVE
@@ -42,17 +42,17 @@ pull_request_rules:
   - name: Automatically merge when GitHub Actions jobs succeed
     conditions:
       - check-success=amd64
-      - check-success~=analyse \([a-z]*\)
       - check-success=build
+      - check-success=codeql (javascript)
+      - check-success=codeql (typescript)
       - check-success=dependency-review
       - check-success=format
       - check-success=gitleaks
       - check-success=lint
-      - check-success~=playwright-tests \(\d, \d\)
+      - check-success=playwright-tests
       - check-success=pr-title
       - check-success=unit-testing
       - check-success=zizmor
-      - "#check-success>=20"
       - "#approved-reviews-by>=1"
     actions:
       merge:
