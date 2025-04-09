@@ -58,7 +58,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "2.6.1",
     "clsx": "2.1.1",
-    "isbot": "5.1.25",
+    "isbot": "5.1.26",
     "motion": "12.6.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
