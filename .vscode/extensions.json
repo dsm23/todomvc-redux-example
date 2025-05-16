@@ -9,6 +9,9 @@
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "joshbolduc.commitlint",
-    "ms-playwright.playwright"
+    "ms-azuretools.vscode-containers",
+    "ms-playwright.playwright",
+    "stylelint.vscode-stylelint",
+    "unifiedjs.vscode-mdx"
   ]
 }
