@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "~/app/store";
 
 export type Todo = {
   text: string;
@@ -65,6 +64,9 @@ const todosSlice = createSlice({
       state.value = state.value.filter((todo) => todo.completed === false);
     },
   },
+  selectors: {
+    getTodos: (state) => state.value,
+  },
 });
 
 export const {
@@ -76,6 +78,6 @@ export const {
   clearCompleted,
 } = todosSlice.actions;
 
-export const getTodos = (state: RootState) => state.todos.value;
+export const { getTodos } = todosSlice.selectors;
 
 export default todosSlice.reducer;
