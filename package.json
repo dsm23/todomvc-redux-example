@@ -75,7 +75,7 @@
     "lint:js": "eslint \"**/*.{js,mjs,ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
     "lint:md": "eslint \"**/*.md?(x)\" --report-unused-disable-directives --max-warnings 0 --cache --cache-strategy=content --cache-location=.eslintmdcache",
     "lint:css": "stylelint \"**/*.css\" --max-warnings 0 --allow-empty-input --cache --cache-strategy=content --cache-location=.stylelintcache",
-    "lint": "run-s lint:md lint:js lint:css",
+    "lint": "run-p lint:md lint:js lint:css",
     "playwright": "playwright",
     "preview": "vite preview",
     "coverage": "vitest run --coverage",
