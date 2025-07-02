@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Lefthook
+lefthook-local.yml
+
+# Coverage
 coverage
 
 # Cache Files
