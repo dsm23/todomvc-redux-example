@@ -1,3 +1,4 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { includeIgnoreFile } from "@eslint/compat";
@@ -6,6 +7,7 @@ import * as mdx from "eslint-plugin-mdx";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import storybook from "eslint-plugin-storybook";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -54,4 +56,5 @@ export default tseslint.config(
     },
   },
   mdx.flat,
+  storybook.configs["flat/recommended"],
 );
