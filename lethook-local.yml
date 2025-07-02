@@ -1,0 +1,11 @@
+# Note: commit-msg hook takes a single parameter,
+#       the name of the file that holds the proposed commit log message.
+# Source: https://git-scm.com/docs/githooks#_commit_msg
+commit-msg:
+  commands:
+    signature-line1:
+      run: 'test $(grep -c "gpg: Signature made $(date)" {1}) -lt 2'
+    signature-line2:
+      run: 'test $(grep -c "gpg:using RSA key CFABD11271FD5139801729014C7E88B708770BD0" {1}) -lt 2'
+    signature-line3:
+      run: 'test $(grep -c "gpg: Good signature from \"David Murdoch <dsmurdoch357@gmail.com>\" [ultimate]" {1}) -lt 2'
