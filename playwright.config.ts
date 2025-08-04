@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const portDev = 5173;
+const portProd = 4173;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -11,28 +14,67 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "blob" : "html",
   use: {
-    baseURL: "http://localhost:5173",
     trace: "on-first-retry",
   },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "chromium-dev",
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: `http://localhost:${portDev}`,
+      },
     },
 
     {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      name: "firefox-dev",
+      use: {
+        ...devices["Desktop Firefox"],
+        baseURL: `http://localhost:${portDev}`,
+      },
     },
 
     {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      name: "webkit-dev",
+      use: {
+        ...devices["Desktop Safari"],
+        baseURL: `http://localhost:${portDev}`,
+      },
+    },
+
+    {
+      name: "chromium-prod",
+      use: {
+        ...devices["Desktop Chrome"],
+        baseURL: `http://localhost:${portProd}`,
+      },
+    },
+
+    {
+      name: "firefox-prod",
+      use: {
+        ...devices["Desktop Firefox"],
+        baseURL: `http://localhost:${portProd}`,
+      },
+    },
+
+    {
+      name: "webkit-prod",
+      use: {
+        ...devices["Desktop Safari"],
+        baseURL: `http://localhost:${portProd}`,
+      },
     },
   ],
-  webServer: {
-    command: "pnpm run dev",
-    url: "http://localhost:5173",
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: `pnpm run build && pnpm run preview --port ${portProd}`,
+      url: `http://localhost:${portProd}`,
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: `pnpm run dev --port ${portDev}`,
+      url: `http://localhost:${portDev}`,
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 });
