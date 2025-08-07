@@ -1,74 +1,75 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import tsconfigPaths from "vite-tsconfig-paths";
-import { coverageConfigDefaults, defaultExclude } from "vitest/config";
-// https://vitejs.dev/config/
+import {
+  coverageConfigDefaults,
+  defaultExclude,
+  defineConfig,
+  mergeConfig,
+} from "vitest/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import storybookTest from "@storybook/addon-vitest/vitest-plugin";
+import viteConfig from "./vite.config";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
-export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
-  test: {
-    globals: false,
-    environment: "jsdom",
-    setupFiles: "./src/vitestSetup.ts",
-    exclude: [...defaultExclude, "**/playwright-tests/**"],
-    coverage: {
-      all: true,
-      include: ["src/**/*.[jt]s?(x)"],
-      exclude: [
-        "**/test-utils/**",
-        "**/playwright-tests/**",
-        "**/entry.server.tsx",
-        ...coverageConfigDefaults.exclude,
-      ],
-      thresholds: {
-        lines: 80,
-        functions: 75,
-        branches: 80,
-        statements: 80,
-      },
-    },
-    projects: [
-      {
-        extends: true,
-        test: {
-          name: "unit",
-          include: ["src/**/?(*.)+(spec|test).[jt]s?(x)"],
-          exclude: [...defaultExclude, "**/playwright-tests/**"],
-        },
-      },
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({
-            configDir: path.join(dirname, ".storybook"),
-          }),
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      globals: false,
+      environment: "jsdom",
+      setupFiles: "./src/vitestSetup.ts",
+      exclude: [...defaultExclude, "**/playwright-tests/**"],
+      coverage: {
+        all: true,
+        include: ["src/**/*.[jt]s?(x)"],
+        exclude: [
+          "**/test-utils/**",
+          "**/playwright-tests/**",
+          "**/entry.server.tsx",
+          ...coverageConfigDefaults.exclude,
         ],
-        test: {
-          name: "storybook",
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: "playwright",
-            instances: [
-              {
-                browser: "chromium",
-              },
-            ],
-          },
-          setupFiles: [".storybook/vitest.setup.ts"],
+        thresholds: {
+          lines: 80,
+          functions: 75,
+          branches: 80,
+          statements: 80,
         },
       },
-    ],
-  },
-});
+      projects: [
+        {
+          extends: true,
+          test: {
+            name: "unit",
+            include: ["src/**/?(*.)+(spec|test).[jt]s?(x)"],
+            exclude: [...defaultExclude, "**/playwright-tests/**"],
+          },
+        },
+        {
+          extends: true,
+          plugins: [
+            // The plugin will run tests for the stories defined in your Storybook config
+            // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+            storybookTest({
+              configDir: path.join(dirname, ".storybook"),
+            }),
+          ],
+          test: {
+            name: "storybook",
+            browser: {
+              enabled: true,
+              headless: true,
+              provider: "playwright",
+              instances: [
+                {
+                  browser: "chromium",
+                },
+              ],
+            },
+            setupFiles: [".storybook/vitest.setup.ts"],
+          },
+        },
+      ],
+    },
+  }),
+);
