@@ -28,6 +28,7 @@ lefthook-local.yml
 
 # Coverage
 coverage
+.vitest-reports/
 
 # Cache Files
 .eslintmdcache
