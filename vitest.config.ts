@@ -1,9 +1,5 @@
-import {
-  coverageConfigDefaults,
-  defaultExclude,
-  defineConfig,
-  mergeConfig,
-} from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
+import { defaultExclude, defineConfig, mergeConfig } from "vitest/config";
 import path from "node:path";
 import storybookTest from "@storybook/addon-vitest/vitest-plugin";
 import viteConfig from "./vite.config";
@@ -18,14 +14,8 @@ export default mergeConfig(
       setupFiles: "./src/vitestSetup.ts",
       exclude: [...defaultExclude, "**/playwright-tests/**"],
       coverage: {
-        all: true,
         include: ["src/**/*.[jt]s?(x)"],
-        exclude: [
-          "**/test-utils/**",
-          "**/playwright-tests/**",
-          "**/entry.server.tsx",
-          ...coverageConfigDefaults.exclude,
-        ],
+        exclude: ["**/test-utils/**", "**/entry.server.tsx", "**/*.d.ts"],
         thresholds: {
           lines: 80,
           functions: 75,
@@ -56,7 +46,7 @@ export default mergeConfig(
             browser: {
               enabled: true,
               headless: true,
-              provider: "playwright",
+              provider: playwright(),
               instances: [
                 {
                   browser: "chromium",
