@@ -1,9 +1,19 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
+import { useReducedMotion } from "motion/react";
 import { RootState } from "~/app/store";
-import { clearCompleted } from "~/features/todos/slice";
+import { clearCompleted, completeAllTodos } from "~/features/todos/slice";
 import { renderWithProviders } from "~/test-utils";
 import MainSection from ".";
+
+vi.mock("motion/react", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("motion/react")>();
+
+  return {
+    ...mod,
+    useReducedMotion: vi.fn(() => false),
+  };
+});
 
 vi.mock("~/app/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("~/app/hooks")>();
@@ -37,31 +47,63 @@ describe("components", () => {
       expect(container.querySelector("section")).toBeInTheDocument();
     });
 
-    // describe("toggle all input", () => {
-    //   it("should render", () => {
-    //     setup();
-    //     const [toggle] = output.props.children[0].props.children;
-    //     expect(toggle.type).toBe("input");
-    //     expect(toggle.props.className).toBe("toggle-all");
-    //     expect(toggle.props.type).toBe("checkbox");
-    //     expect(toggle.props.checked).toBe(false);
-    //   });
+    it("should render container, prefers reduced motion", () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true);
 
-    // it("should be checked if all todos completed", () => {
-    //   setup({
-    //     completedCount: 2,
-    //   });
-    //   const [toggle] = output.props.children[0].props.children;
-    //   expect(toggle.props.checked).toBe(true);
-    // });
+      const { container } = setup();
 
-    //   it("should call completeAllTodos on change", () => {
-    //     setup();
-    //     const [, label] = output.props.children[0].props.children;
-    //     label.props.onClick({});
-    //     expect(props.actions.completeAllTodos).toBeCalled();
-    //   });
-    // });
+      expect(container.querySelector("section")).toBeInTheDocument();
+    });
+
+    describe("toggle all input", () => {
+      it("toggle all input is not rendered", () => {
+        setup({
+          todos: {
+            value: [],
+          },
+        });
+        const toggle = screen.queryByLabelText("Toggle all");
+
+        expect(toggle).not.toBeInTheDocument();
+      });
+
+      it("toggle all input", () => {
+        setup();
+
+        const toggle = screen.getByLabelText("Toggle all");
+
+        expect(toggle).not.toBeChecked();
+      });
+
+      it("should be checked if all todos completed", () => {
+        setup({
+          todos: {
+            value: [
+              {
+                id: 0,
+                completed: true,
+                text: "Use Redux",
+              },
+            ],
+          },
+        });
+
+        const toggle = screen.getByLabelText("Toggle all");
+
+        expect(toggle).toBeChecked();
+      });
+
+      it("should call completeAllTodos on change", () => {
+        setup();
+
+        // TODO: allow for checking the checkbox rather than clicking the label
+        const toggle = screen.getByText("Toggle all", { selector: "label" });
+
+        toggle.click();
+
+        expect(completeAllTodos).toBeCalledTimes(1);
+      });
+    });
 
     describe("footer", () => {
       it("should render", () => {
