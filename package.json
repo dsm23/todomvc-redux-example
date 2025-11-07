@@ -31,9 +31,9 @@
     "@typescript-eslint/eslint-plugin": "8.46.3",
     "@typescript-eslint/parser": "8.46.3",
     "@vitejs/plugin-react": "5.1.0",
-    "@vitest/browser-playwright": "4.0.6",
-    "@vitest/coverage-v8": "4.0.6",
-    "@vitest/ui": "4.0.6",
+    "@vitest/browser-playwright": "4.0.7",
+    "@vitest/coverage-v8": "4.0.7",
+    "@vitest/ui": "4.0.7",
     "eslint": "9.39.1",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
@@ -60,7 +60,7 @@
     "typescript-eslint": "8.46.3",
     "vite": "7.1.12",
     "vite-tsconfig-paths": "5.1.4",
-    "vitest": "4.0.6"
+    "vitest": "4.0.7"
   },
   "dependencies": {
     "@reduxjs/toolkit": "2.9.2",
