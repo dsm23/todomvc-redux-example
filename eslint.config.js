@@ -1,19 +1,22 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import path from "node:path";
-import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import * as mdx from "eslint-plugin-mdx";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import storybook from "eslint-plugin-storybook";
+import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-const gitignorePath = path.resolve(import.meta.dirname, ".gitignore");
-
-export default tseslint.config(
-  includeIgnoreFile(gitignorePath),
+export default defineConfig(
+  globalIgnores([
+    "coverage/",
+    "dist/",
+    "playwright-report/",
+    "storybook-static/",
+    "test-results/",
+  ]),
   {
     extends: [
       js.configs.recommended,
