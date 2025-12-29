@@ -43,7 +43,7 @@
     "eslint-plugin-react-refresh": "0.4.26",
     "eslint-plugin-storybook": "10.1.10",
     "globals": "16.5.0",
-    "jsdom": "27.3.0",
+    "jsdom": "27.4.0",
     "lefthook": "2.0.13",
     "npm-run-all2": "8.0.4",
     "prettier": "3.7.4",
