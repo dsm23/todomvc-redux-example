@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { setVisibilityFilter } from "~/features/visibility-filter/slice";
 import { renderWithProviders } from "~/test-utils";
 import Link from ".";
+
 import styles from "./styles.module.css";
 
 vi.mock("~/app/hooks", async (importOriginal) => {

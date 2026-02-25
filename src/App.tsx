@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { setupStore } from "~/app/store";
 import Header from "~/components/header";
 import MainSection from "~/components/main";
+
 import styles from "./styles.module.css";
 
 const App = () => (

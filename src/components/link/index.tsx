@@ -6,6 +6,7 @@ import {
   setVisibilityFilter,
 } from "~/features/visibility-filter/slice";
 import type { VisibilityFilter } from "~/features/visibility-filter/slice";
+
 import styles from "./styles.module.css";
 
 type Props = {
