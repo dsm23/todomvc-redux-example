@@ -52,7 +52,6 @@
       "extends": ["packages:stylelint"],
       "groupName": "stylelint packages"
     },
-    // only matchPackageNames can be OR'd https://github.com/renovatebot/renovate/discussions/13644#discussioncomment-1996887
     {
       "groupName": "playwright monorepo",
       "matchPackageNames": [
@@ -71,8 +70,5 @@
     }
   ],
   "rebaseWhen": "conflicted",
-  "patch": {
-    "rebaseWhen": "behind-base-branch"
-  },
   "osvVulnerabilityAlerts": true
 }
