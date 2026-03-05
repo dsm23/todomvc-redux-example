@@ -5,7 +5,7 @@
   "sideEffects": false,
   "type": "module",
   "devDependencies": {
-    "@axe-core/playwright": "4.11.0",
+    "@axe-core/playwright": "4.11.1",
     "@chromatic-com/storybook": "4.1.3",
     "@commitlint/cli": "20.3.0",
     "@commitlint/config-conventional": "20.3.0",
