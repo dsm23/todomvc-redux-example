@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { screen } from "@testing-library/react";
-import { RootState } from "~/app/store";
+import type { RootState } from "~/app/store";
 import { renderWithProviders } from "~/test-utils";
 import TodoList from ".";
 

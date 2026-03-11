@@ -75,7 +75,7 @@ describe("components", () => {
       await user.type(input, "Use Radox");
 
       input.focus();
-      fireEvent.keyDown(document.activeElement || document.body, {
+      fireEvent.keyDown(document.activeElement ?? document.body, {
         key: "Enter",
         code: "Enter",
         keyCode: 13,

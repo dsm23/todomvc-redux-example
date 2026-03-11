@@ -18,7 +18,7 @@ export const getVisibleTodos = createSelector(
       case SHOW_ACTIVE:
         return todos.filter((t) => !t.completed);
       default:
-        throw new Error("Unknown filter: " + visibilityFilter);
+        throw new Error(`Unknown filter: ${String(visibilityFilter)}`);
     }
   },
 );

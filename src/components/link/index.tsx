@@ -20,19 +20,16 @@ const Link: FunctionComponent<Props> = ({ children, filter }) => {
 
   const active = filter === visibilityFilter;
 
-  const handleClick = () => {
-    dispatch(setVisibilityFilter(filter));
-  };
+  const handleClick = () => void dispatch(setVisibilityFilter(filter));
 
   return (
-    // eslint-disable jsx-a11y/anchor-is-valid
-    <a
+    <button
       className={cx(styles.link, { [styles.selected]: active })}
       style={{ cursor: "pointer" }}
       onClick={handleClick}
     >
       {children}
-    </a>
+    </button>
   );
 };
 

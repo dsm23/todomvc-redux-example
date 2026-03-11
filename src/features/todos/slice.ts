@@ -61,7 +61,7 @@ const todosSlice = createSlice({
       }
     },
     clearCompleted(state) {
-      state.value = state.value.filter((todo) => todo.completed === false);
+      state.value = state.value.filter((todo) => !todo.completed);
     },
   },
   selectors: {

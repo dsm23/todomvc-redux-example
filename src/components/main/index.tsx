@@ -23,9 +23,9 @@ const MainSection = () => {
 
   const todosCount = todos.length;
 
-  const handleClick = () => dispatch(completeAllTodos());
+  const handleClick = () => void dispatch(completeAllTodos());
 
-  const handleClearCompleted = () => dispatch(clearCompleted());
+  const handleClearCompleted = () => void dispatch(clearCompleted());
 
   const prefersReducedMotion = useReducedMotion();
 

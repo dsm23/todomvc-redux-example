@@ -14,12 +14,12 @@ const injectFromEnvFile = () => {
     /** mode local file */ `.env.playwright.local`,
   ];
 
-  envFiles.forEach((file) => {
+  for (const file of envFiles) {
     const filePath = path.join(envDir, file);
     if (fs.existsSync(filePath)) {
       dotenv.config({ path: filePath });
     }
-  });
+  }
 };
 
 injectFromEnvFile();
@@ -30,7 +30,7 @@ injectFromEnvFile();
 export default defineConfig({
   testDir: "./playwright-tests",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
+  forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "blob" : "html",

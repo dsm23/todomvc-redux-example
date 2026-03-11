@@ -24,7 +24,7 @@ const TodoTextInput: FunctionComponent<Props> = ({
   onSave,
   ...props
 }) => {
-  const [text, setText] = useState(props.text || "");
+  const [text, setText] = useState(props.text ?? "");
 
   const handleSubmit: KeyboardEventHandler<HTMLInputElement> = (e) => {
     const newText = e.currentTarget.value.trim();
@@ -56,6 +56,7 @@ const TodoTextInput: FunctionComponent<Props> = ({
         className,
       })}
       type="text"
+      // oxlint-disable-next-line jsx-a11y/no-autofocus
       autoFocus
       value={text}
       onBlur={handleBlur}

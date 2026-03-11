@@ -31,7 +31,6 @@ coverage
 .vitest-reports/
 
 # Cache Files
-.eslintmdcache
 .stylelintcache
 
 # Local Netlify folder
