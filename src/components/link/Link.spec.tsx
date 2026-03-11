@@ -47,14 +47,16 @@ describe("component", () => {
     it("should render correctly", () => {
       setup();
 
-      expect(screen.getByText("All", { selector: "a" })).toBeInTheDocument();
+      expect(
+        screen.getByText("All", { selector: "button" }),
+      ).toBeInTheDocument();
     });
 
     // TODO: requires preloadedState
     it("should have class selected if active", () => {
       setup();
 
-      expect(screen.getByText("All", { selector: "a" })).toHaveClass(
+      expect(screen.getByText("All", { selector: "button" })).toHaveClass(
         styles.selected,
       );
     });
@@ -62,7 +64,7 @@ describe("component", () => {
     it("should call setFilter on click", async () => {
       setup();
 
-      await userEvent.click(screen.getByText("All", { selector: "a" }));
+      await userEvent.click(screen.getByText("All", { selector: "button" }));
 
       expect(setVisibilityFilter).toBeCalledTimes(1);
     });

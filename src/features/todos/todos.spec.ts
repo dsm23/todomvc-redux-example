@@ -321,7 +321,7 @@ describe("todos reducer", () => {
         addTodo({
           text: "Write more tests",
         }),
-      ].reduce(reducer, {
+      ].reduce((acc, cur) => reducer(acc, cur), {
         value: [
           {
             id: 0,

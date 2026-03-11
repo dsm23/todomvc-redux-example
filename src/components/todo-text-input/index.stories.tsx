@@ -12,7 +12,7 @@ const meta = {
     editing: false,
     newTodo: false,
     text: "",
-    onSave: fn(),
+    onSave: fn<() => void>(),
   },
   argTypes: {
     editing: {

@@ -38,26 +38,28 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  justify-content: center;
 }
 
 .filters li {
   display: inline;
 }
 
-.filters li a {
+.filters li button {
   margin: 3px;
   padding: 3px 7px;
   border: 1px solid transparent;
   border-radius: 3px;
   color: inherit;
   text-decoration: none;
+  transform: translateY(-25%);
 }
 
-.filters li a:hover {
+.filters li button:hover {
   border-color: #db7676;
 }
 
-.filters li a.selected {
+.filters li button.selected {
   border-color: #ce4646;
 }
 

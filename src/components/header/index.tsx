@@ -13,7 +13,7 @@ const Header = () => {
       <TodoTextInput
         newTodo
         onSave={(text: string) => {
-          if (text.length !== 0) {
+          if (text.length > 0) {
             dispatch(addTodo({ text }));
           }
         }}

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import { useReducedMotion } from "motion/react";
-import { RootState } from "~/app/store";
+import type { RootState } from "~/app/store";
 import { clearCompleted, completeAllTodos } from "~/features/todos/slice";
 import { renderWithProviders } from "~/test-utils";
 import MainSection from ".";
@@ -114,7 +114,7 @@ describe("components", () => {
         expect(screen.queryByText("items left!")).not.toBeInTheDocument();
       });
 
-      it("onClearCompleted should call clearCompleted", async () => {
+      it("onClearCompleted should call clearCompleted", () => {
         setup({
           todos: {
             value: [

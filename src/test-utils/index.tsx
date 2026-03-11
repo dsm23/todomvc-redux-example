@@ -1,5 +1,5 @@
 import { afterEach } from "vitest";
-import type { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { cleanup, render } from "@testing-library/react";
 import type { RenderOptions } from "@testing-library/react";
@@ -21,7 +21,7 @@ function customRender(
 ): ReturnType<typeof render> {
   return render(ui, {
     // wrap provider(s) here if needed
-    wrapper: ({ children }) => children,
+    wrapper: ({ children }): ReactNode => children,
     ...options,
   });
 }
@@ -37,6 +37,7 @@ function renderWithProviders(
     ...renderOptions
   } = extendedRenderOptions;
 
+  // oxlint-disable-next-line react/only-export-components
   const Wrapper = ({ children }: PropsWithChildren) => (
     <Provider store={store}>{children}</Provider>
   );
