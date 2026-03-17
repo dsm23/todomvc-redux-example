@@ -47,7 +47,7 @@ describe("components", () => {
     it("should call addTodo if length of text is greater than 0", async () => {
       const { user } = setup();
 
-      expect(addTodo).not.toBeCalled();
+      expect(addTodo).not.toHaveBeenCalled();
 
       const input = screen.getByPlaceholderText("What needs to be done?", {
         selector: "input",
@@ -63,7 +63,7 @@ describe("components", () => {
         charCode: 13,
       });
 
-      expect(addTodo).toBeCalledTimes(1);
+      expect(addTodo).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -66,7 +66,7 @@ describe("component", () => {
 
       await userEvent.click(screen.getByText("All", { selector: "button" }));
 
-      expect(setVisibilityFilter).toBeCalledTimes(1);
+      expect(setVisibilityFilter).toHaveBeenCalledTimes(1);
     });
   });
 });

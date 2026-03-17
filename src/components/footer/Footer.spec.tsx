@@ -76,7 +76,7 @@ describe("components", () => {
 
       button.click();
 
-      expect(mockFn).toBeCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
     });
   });
 });
