@@ -38,13 +38,3 @@
 .toggleAll:checked + label::before {
   color: #484848;
 }
-
-/*
-	Hack to remove background from Mobile Safari.
-	Can't use it globally since it destroys checkboxes in Firefox
-*/
-@media screen and (min-resolution: 0) {
-  .toggleAll {
-    background: none;
-  }
-}

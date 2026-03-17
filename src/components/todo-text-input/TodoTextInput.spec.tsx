@@ -84,8 +84,8 @@ describe("components", () => {
 
       expect(screen.getByDisplayValue("Use Radox")).toBeInTheDocument();
       expect(screen.queryByDisplayValue("Use Redux")).not.toBeInTheDocument();
-      expect(mockFn).toBeCalledTimes(1);
-      expect(mockFn).toBeCalledWith("Use Radox");
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledWith("Use Radox");
     });
 
     // it("should reset state on return key press if newTodo", () => {
@@ -102,7 +102,7 @@ describe("components", () => {
 
       screen.getByDisplayValue("Use Redux").blur();
 
-      expect(mockFn).toBeCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
     it("shouldnt call onSave on blur if newTodo", () => {
@@ -112,7 +112,7 @@ describe("components", () => {
 
       screen.getByDisplayValue("Use Redux").blur();
 
-      expect(mockFn).not.toBeCalled();
+      expect(mockFn).not.toHaveBeenCalled();
     });
   });
 });
