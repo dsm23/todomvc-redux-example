@@ -101,7 +101,7 @@ describe("components", () => {
 
         toggle.click();
 
-        expect(completeAllTodos).toBeCalledTimes(1);
+        expect(completeAllTodos).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -129,7 +129,7 @@ describe("components", () => {
 
         screen.getByText("Clear completed", { selector: "button" }).click();
 
-        expect(clearCompleted).toBeCalledTimes(1);
+        expect(clearCompleted).toHaveBeenCalledTimes(1);
       });
     });
 

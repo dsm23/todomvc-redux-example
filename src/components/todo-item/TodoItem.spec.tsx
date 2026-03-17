@@ -60,7 +60,7 @@ describe("components", () => {
     //   const { output, props } = setup();
     //   const input = output.props.children.props.children[0];
     //   input.props.onChange({});
-    //   expect(props.completeTodo).toBeCalledWith(0);
+    //   expect(props.completeTodo).toHaveBeenCalledWith(0);
     // });
 
     it("button onClick should call deleteTodo", () => {
@@ -68,7 +68,7 @@ describe("components", () => {
 
       container.querySelector("button")?.click();
 
-      expect(deleteTodo).toBeCalledTimes(1);
+      expect(deleteTodo).toHaveBeenCalledTimes(1);
     });
 
     it("label onDoubleClick should put component in edit state", () => {
@@ -96,13 +96,13 @@ describe("components", () => {
     // it("TodoTextInput onSave should call editTodo", () => {
     //   const { output, props } = setup(true);
     //   output.props.children.props.onSave("Use Redux");
-    //   expect(props.editTodo).toBeCalledWith(0, "Use Redux");
+    //   expect(props.editTodo).toHaveBeenCalledWith(0, "Use Redux");
     // });
 
     // it("TodoTextInput onSave should call deleteTodo if text is empty", () => {
     //   const { output, props } = setup(true);
     //   output.props.children.props.onSave("");
-    //   expect(props.deleteTodo).toBeCalledWith(0);
+    //   expect(props.deleteTodo).toHaveBeenCalledWith(0);
     // });
 
     // it("TodoTextInput onSave should exit component from edit state", () => {
