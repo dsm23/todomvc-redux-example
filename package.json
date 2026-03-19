@@ -28,7 +28,7 @@
     "@vitest/coverage-v8": "4.1.0",
     "@vitest/ui": "4.1.0",
     "dotenv": "17.3.1",
-    "eslint-plugin-react-dom": "2.13.0",
+    "eslint-plugin-react-dom": "3.0.0",
     "eslint-plugin-storybook": "10.2.19",
     "jsdom": "29.0.0",
     "knip": "5.86.0",
