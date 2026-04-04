@@ -31,7 +31,7 @@
     "eslint-plugin-react-dom": "3.0.0",
     "eslint-plugin-storybook": "10.3.3",
     "jsdom": "29.0.1",
-    "knip": "6.1.1",
+    "knip": "6.2.0",
     "lefthook": "2.1.4",
     "npm-run-all2": "8.0.4",
     "oxfmt": "0.42.0",
