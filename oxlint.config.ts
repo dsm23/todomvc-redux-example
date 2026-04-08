@@ -55,23 +55,21 @@ export default defineConfig({
         allow: ["debug", "warn", "info", "trace", "warn"],
       },
     ],
-    "no-restricted-syntax": [
-      "warn",
-      {
-        selector:
-          "ImportDeclaration[source.value='react'][specifiers.0.type='ImportDefaultSpecifier']",
-        message:
-          "Default React import not allowed since we use the TypeScript jsx-transform. If you need a global type that collides with a React named export (such as `MouseEvent`), try using `globalThis.MouseHandler`",
-      },
-      {
-        selector:
-          "ImportDeclaration[source.value='react'] :matches(ImportNamespaceSpecifier)",
-        message:
-          "Named * React import is not allowed. Please import what you need from React with Named Imports",
-      },
-    ],
     "no-negated-condition": "off",
     "no-optional-chaining": "off",
+    "no-restricted-imports": [
+      "warn",
+      {
+        paths: [
+          {
+            name: "react",
+            importNames: ["default"],
+            message:
+              "Named * React import is not allowed. Please import what you need from React with Named Imports",
+          },
+        ],
+      },
+    ],
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/anchor-has-content": "off",
     "oxc/no-async-await": "off",
