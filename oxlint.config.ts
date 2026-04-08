@@ -10,7 +10,7 @@ export default defineConfig({
     "typescript",
     "unicorn",
   ],
-  jsPlugins: ["eslint-plugin-react-dom"],
+  jsPlugins: ["eslint-plugin-better-tailwindcss"],
   categories: {
     correctness: "warn",
     suspicious: "warn",
@@ -20,12 +20,10 @@ export default defineConfig({
     nursery: "warn",
   },
   env: {
-    builtin: true,
     browser: true,
+    node: true,
     serviceworker: true,
-  },
-  globals: {
-    process: "readonly",
+    worker: true,
   },
   ignorePatterns: [
     "coverage/",
@@ -70,6 +68,15 @@ export default defineConfig({
         ],
       },
     ],
+    "better-tailwindcss/enforce-canonical-classes": "warn",
+    "better-tailwindcss/enforce-consistent-class-order": "warn",
+    "better-tailwindcss/enforce-consistent-important-position": "warn",
+    "better-tailwindcss/enforce-consistent-variable-syntax": "warn",
+    "better-tailwindcss/enforce-shorthand-classes": "warn",
+    "better-tailwindcss/no-conflicting-classes": "warn",
+    "better-tailwindcss/no-deprecated-classes": "warn",
+    "better-tailwindcss/no-duplicate-classes": "warn",
+    "better-tailwindcss/no-unnecessary-whitespace": "warn",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/anchor-has-content": "off",
     "oxc/no-async-await": "off",
@@ -79,18 +86,6 @@ export default defineConfig({
     "react/jsx-filename-extension": "off",
     "react/no-multi-comp": "off",
     "react/react-in-jsx-scope": "off",
-    "react-dom/no-dangerously-set-innerhtml": "warn",
-    "react-dom/no-dangerously-set-innerhtml-with-children": "warn",
-    "react-dom/no-find-dom-node": "warn",
-    "react-dom/no-flush-sync": "warn",
-    "react-dom/no-hydrate": "warn",
-    "react-dom/no-namespace": "warn",
-    "react-dom/no-render": "warn",
-    "react-dom/no-render-return-value": "warn",
-    "react-dom/no-script-url": "warn",
-    "react-dom/no-unsafe-iframe-sandbox": "warn",
-    "react-dom/no-use-form-state": "warn",
-    "react-dom/no-void-elements-with-children": "warn",
     "typescript/consistent-type-imports": [
       "warn",
       {
@@ -109,6 +104,11 @@ export default defineConfig({
     "unicorn/no-array-reduce": "off",
     "vitest/consistent-vitest-vi": "warn",
     "vitest/no-importing-vitest-globals": "warn",
+  },
+  settings: {
+    "better-tailwindcss": {
+      entryPoint: "./src/index.css",
+    },
   },
   overrides: [
     {
