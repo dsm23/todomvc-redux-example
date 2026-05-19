@@ -79,11 +79,14 @@ export default defineConfig({
     "better-tailwindcss/no-unnecessary-whitespace": "warn",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/anchor-has-content": "off",
+    // TODO: improve accessibility of the app and enable these rule
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
     "oxc/no-async-await": "off",
     "oxc/no-rest-spread-properties": "off",
     "react/button-has-type": "off",
-    // TODO: remove when it supports tsx
-    "react/jsx-filename-extension": "off",
+    "react/jsx-filename-extension": ["warn", { extensions: ["jsx", "tsx"] }],
     "react/no-multi-comp": "off",
     "react/react-in-jsx-scope": "off",
     "typescript/consistent-type-imports": [
@@ -102,8 +105,6 @@ export default defineConfig({
     "typescript/strict-boolean-expressions": "off",
     "unicorn/filename-case": "off",
     "unicorn/no-array-reduce": "off",
-    "vitest/consistent-vitest-vi": "warn",
-    "vitest/no-importing-vitest-globals": "warn",
   },
   settings: {
     "better-tailwindcss": {
@@ -111,6 +112,31 @@ export default defineConfig({
     },
   },
   overrides: [
+    {
+      files: [
+        "**/*.{spec,test}.{ts,tsx,js,jsx}",
+        "**/{spec,test}.{ts,tsx,js,jsx}",
+        "**/__tests__/**/*",
+      ],
+      rules: {
+        "jest/no-conditional-expect": "off",
+        "jest/no-conditional-in-test": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "unicorn/consistent-function-scoping": "off",
+        "vitest/consistent-vitest-vi": "warn",
+        "vitest/no-conditional-expect": "off",
+        "vitest/no-conditional-in-test": "off",
+        "vitest/no-importing-vitest-globals": "off",
+        "vitest/no-standalone-expect": [
+          "warn",
+          {
+            additionalTestBlockFunctions: ["fc.property"],
+          },
+        ],
+        "vitest/require-test-timeout": "off",
+      },
+      // plugins: ["vitest"],
+    },
     {
       files: [
         "**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)",
