@@ -20,6 +20,17 @@
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+uses\\:\\s*dawidd6\\/action-download-artifact@(?<currentDigest>[A-Za-z0-9]*)\\s+#\\s+(?<currentValue>.+?)\\s+"
       ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
+      "matchStrings": [
+        "FROM\\s+ghcr\\.io/pnpm/pnpm:(?<currentValue>\\d+\\.\\d+\\.\\d+)(?:@(?<currentDigest>sha256:[a-f0-9]{64}))?"
+      ],
+      "depNameTemplate": "pnpm/pnpm",
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "ghcr.io/pnpm/pnpm",
+      "autoReplaceStringTemplate": "FROM ghcr.io/pnpm/pnpm:{{{newValue}}}@{{{newDigest}}}"
     }
   ],
   "registryAliases": {
@@ -59,13 +70,6 @@
     {
       "extends": ["packages:stylelint"],
       "groupName": "stylelint packages"
-    },
-    {
-      "description": "Force pnpm Docker to use GitHub timestamps",
-      "matchPackageNames": ["ghcr.io/pnpm/pnpm"],
-      "matchDatasources": ["docker"],
-      "overrideDatasource": "npm",
-      "overridePackageName": "pnpm"
     },
     {
       "groupName": "playwright monorepo",
