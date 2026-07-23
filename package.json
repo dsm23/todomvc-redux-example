@@ -28,7 +28,7 @@
     "@vitest/coverage-v8": "4.1.10",
     "@vitest/ui": "4.1.10",
     "dotenv": "17.4.2",
-    "eslint-plugin-better-tailwindcss": "4.6.1",
+    "eslint-plugin-better-tailwindcss": "4.7.0",
     "eslint-plugin-storybook": "10.5.2",
     "jsdom": "29.1.1",
     "knip": "6.27.0",
@@ -38,7 +38,7 @@
     "oxlint": "1.69.0",
     "oxlint-tsgolint": "0.25.0",
     "storybook": "10.5.2",
-    "stylelint": "17.14.0",
+    "stylelint": "17.14.1",
     "stylelint-config-standard": "40.0.0",
     "stylelint-order": "8.1.1",
     "tailwindcss": "4.3.3",
@@ -76,5 +76,5 @@
   "engines": {
     "node": ">=26.0.0"
   },
-  "packageManager": "pnpm@11.15.0"
+  "packageManager": "pnpm@11.15.1"
 }
